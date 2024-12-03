@@ -1,0 +1,21 @@
+service: serverless-typescript-template
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+plugins:
+  - serverless-offline
+
+package:
+  exclude:
+    - src/**/*.ts
+
+functions:
+  get-users:
+    handler: src/handlers/get-users.handler
+    events:
+      - http:
+          path: get-users
+          method: get
