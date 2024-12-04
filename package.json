@@ -10,7 +10,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "dependencies": {
     "aws-lambda": "1.0.7",
