@@ -15,7 +15,7 @@ export class UserMemoryRepository implements IUserRepository {
         }
       ]
     } catch (error) {
-      throw new Error(Messages.UNCONTROLLER_ERROR)
+      throw new Error(Messages.SERVICE_UNAVAILABLE)
     }
   }
 }

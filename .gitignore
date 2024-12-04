@@ -4,3 +4,4 @@ build
 undefined
 package-lock.json
 .serverless
+coverage

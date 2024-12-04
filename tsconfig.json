@@ -4,8 +4,9 @@
     "module": "CommonJS",
     "outDir": "./build",
     "strict": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noEmit": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "test/infrastructure/driven/repository/user/user.memory.repository.test.ts"],
   "exclude": ["node_modules", "build"]
 }
