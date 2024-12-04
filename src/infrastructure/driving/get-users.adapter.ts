@@ -1,9 +1,9 @@
 import { APIGatewayProxyEventV2 } from 'aws-lambda'
-import { Messages } from '../constants/messages'
-import { GetUsersUseCase } from '../core/application/get-users.usecase'
-import { UserMemoryRepository } from '../core/infrastructure/user.memory.repository'
-import { responseMessage } from '../utils/response-message'
-import { StatusCodes } from '../constants/status-codes'
+import { Messages } from '../../constants/messages'
+import { GetUsersUseCase } from '../../domain/usecases/get-users.usecase'
+import { UserMemoryRepository } from '../driven/repository/user/user.memory.repository'
+import { responseMessage } from '../../utils/response-message'
+import { StatusCodes } from '../../constants/status-codes'
 
 const userRepository = new UserMemoryRepository()
 const getUsersUseCase = new GetUsersUseCase(userRepository)

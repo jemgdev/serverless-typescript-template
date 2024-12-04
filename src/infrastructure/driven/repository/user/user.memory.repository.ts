@@ -1,6 +1,6 @@
-import { Messages } from "../../constants/messages";
-import { UserModel } from "../domain/user.model";
-import { IUserRepository } from "../domain/user.repository.interface";
+import { Messages } from "../../../../constants/messages";
+import { UserModel } from "../../../../domain/models/user.model";
+import { IUserRepository } from "./user.repository.interface";
 
 export class UserMemoryRepository implements IUserRepository {
   async getAllUsers(): Promise<UserModel[]> {

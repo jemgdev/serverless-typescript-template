@@ -1,4 +1,4 @@
-import { IUserRepository } from '../domain/user.repository.interface'
+import { IUserRepository } from '../user.repository.interface'
 
 export class GetUsersUseCase {
   constructor (private readonly userRepository: IUserRepository) {}
