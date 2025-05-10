@@ -1,4 +1,4 @@
-service: ${param:stage}-serverless-typescript-template
+service: serverless-typescript-template
 frameworkVersion: "4"
 
 provider:

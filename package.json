@@ -7,7 +7,8 @@
     "build": "tsc",
     "test": "jest test --no-cache --coverage --runInBand",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "deploy": "serverless deploy --param='stage=dev' --param='region=us-east-1' --verbose"
   },
   "keywords": [],
   "author": "jemgdev",
