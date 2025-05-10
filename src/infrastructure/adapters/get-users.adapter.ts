@@ -3,8 +3,10 @@ import { UserMemoryRepository } from '@infrastructure/repositories/user/user.mem
 import { responseMessage } from '@utils/response-message'
 import { Messages } from '@utils/constants/messages'
 import { StatusCodes } from '@utils/constants/status-codes'
+import { LoggerLoggerfyRepository } from '@infrastructure/repositories/logger.loggerfy.repository'
 
-const userRepository = new UserMemoryRepository()
+const loggerRepository = new LoggerLoggerfyRepository()
+const userRepository = new UserMemoryRepository(loggerRepository)
 const getUsersUseCase = new GetUsersUseCase(userRepository)
 
 export const getUsersHttpAdapter = async () => {

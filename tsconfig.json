@@ -12,10 +12,10 @@
     "baseUrl": "./src",
     "outDir": "./dist",
     "paths": {
-      "@domain": ["domain/*"],
-      "@infrastructure": ["infrastructure/*"],
-      "@usecases": ["usecases/*"],
-      "@utils": ["utils/*"],
+      "@domain/*": ["./domain/*"],
+      "@infrastructure/*": ["./infrastructure/*"],
+      "@usecases/*": ["./usecases/*"],
+      "@utils/*": ["./utils/*"],
       "@*": ["*"]
     }
   },
