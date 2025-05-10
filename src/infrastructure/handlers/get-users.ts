@@ -1,13 +1,12 @@
-import { APIGatewayProxyEventV2 } from 'aws-lambda'
-import { responseMessage } from "../../utils/response-message"
-import { StatusCodes } from '../../utils/constants/status-codes'
-import { getUsersHttpAdapter } from '../adapters/get-users.adapter'
+import { responseMessage } from "@utils/response-message"
+import { StatusCodes } from '@utils/constants/status-codes'
+import { getUsersHttpAdapter } from '@infrastructure/adapters/get-users.adapter'
 
-export const handler = async (event: APIGatewayProxyEventV2) => {
+export const handler = async () => {
   try {
-    const response = await getUsersHttpAdapter(event)
+    const response = await getUsersHttpAdapter()
     return response
-  } catch (error: any) {
+  } catch (error) {
     return responseMessage({
       statusCode: StatusCodes.UNCONTROLLER_ERROR
     })

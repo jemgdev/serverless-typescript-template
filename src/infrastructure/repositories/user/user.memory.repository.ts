@@ -1,11 +1,8 @@
-import { Messages } from "../../../utils/constants/messages";
-import { UserModel } from "../../../domain/models/user.model";
-import { IUserRepository } from "../../../domain/repositories/user.repository.interface";
-import { Environments } from "../../../environments";
+import { UserModel } from "@domain/models/user.model";
+import { IUserRepository } from "@domain/repositories/user.repository.interface";
 
 export class UserMemoryRepository implements IUserRepository {
   async getAllUsers(): Promise<UserModel[]> {
-    console.log(Environments)
     return [
       {
         name: 'Josué',
