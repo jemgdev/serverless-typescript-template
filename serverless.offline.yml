@@ -1,0 +1,26 @@
+service: serverless-typescript-template
+frameworkVersion: "4"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: ${param:region}
+  environment:
+    STAGE: ${param:stage}
+    REGION: ${param:region}
+
+plugins:
+  - serverless-offline
+
+package:
+  exclude:
+    - src/**/*.ts
+    - test
+
+functions:
+  get-users:
+    handler: src/infrastructure/handlers/get-users.handler
+    events:
+      - http:
+          path: get-users
+          method: get

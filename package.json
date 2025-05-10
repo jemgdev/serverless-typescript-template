@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "main": "index.js",
   "scripts": {
-    "dev": "serverless offline --param='stage=dev' --param='region=us-east-1' --verbose",
+    "dev": "serverless offline --config serverless.offline.yml --param='stage=dev' --param='region=us-east-1'",
     "build": "tsc",
     "test": "jest test --no-cache --coverage --runInBand",
     "lint": "eslint .",
