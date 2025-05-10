@@ -19,7 +19,7 @@ package:
 
 functions:
   get-users:
-    handler: src/infrastructure/handlers/get-users.handler
+    handler: dist/src/infrastructure/handlers/get-users.handler
     events:
       - http:
           path: get-users
