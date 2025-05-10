@@ -4,10 +4,10 @@ frameworkVersion: "4"
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
+  region: ${param:region}
   environment:
     STAGE: ${param:stage}
-    REGION: us-east-1
+    REGION: ${param:region}
 
 plugins:
   - serverless-offline
@@ -15,10 +15,11 @@ plugins:
 package:
   exclude:
     - src/**/*.ts
+    - test
 
 functions:
   get-users:
-    handler: src/handlers/get-users.handler
+    handler: src/infrastructure/handlers/get-users.handler
     events:
       - http:
           path: get-users

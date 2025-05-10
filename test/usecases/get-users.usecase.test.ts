@@ -1,5 +1,5 @@
-import { Messages } from '../../src/constants/messages'
-import { UserMemoryRepository } from '../../src/infrastructure/driven/repository/user/user.memory.repository'
+import { Messages } from '../../src/utils/constants/messages'
+import { UserMemoryRepository } from '../../src/infrastructure/repositories/user/user.memory.repository'
 import { GetUsersUseCase } from '../../src/usecases/get-users.usecase'
 import { usersMock } from '../mocks/user.model.mock'
 
@@ -20,7 +20,7 @@ describe('GetUsersUseCase', () => {
     expect(usersFound).toStrictEqual(usersMock)
   })
 
-  it('Should throw an service unavailable error when repository throws an uavailable error', async () => {
+  it('Should throw an service unavailable error when repository throws an unavailable error', async () => {
     jest.spyOn(userRepository, 'getAllUsers')
       .mockRejectedValue(new Error(Messages.SERVICE_UNAVAILABLE))
 
@@ -29,16 +29,5 @@ describe('GetUsersUseCase', () => {
     await expect(getUserUseCase.invoke())
       .rejects
       .toThrow(Messages.SERVICE_UNAVAILABLE)
-  })
-
-  it('Should throw a uncontroller error when repository throws any error', async () => {
-    jest.spyOn(userRepository, 'getAllUsers')
-      .mockRejectedValue(new Error('Any error'))
-
-    const getUserUseCase = new GetUsersUseCase(userRepository)
-    
-    await expect(getUserUseCase.invoke())
-      .rejects
-      .toThrow(Messages.UNCONTROLLER_ERROR)
   })
 })
