@@ -1,8 +1,8 @@
-import { getUsersHttpAdapter } from '@adapters/get-users.adapter'
-import { GetUsersUseCase } from '@core/usecases/get-users.usecase'
-import { UserMemoryRepository } from '@core/infrastructure/repositories/user/user.memory.repository'
-import { Messages } from '@utils/constants/messages'
-import { StatusCodes } from '@utils/constants/status-codes'
+import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
+import { GetUsersUseCase } from '../../src/core/usecases/get-users.usecase'
+import { UserMemoryRepository } from '../../src/core/infrastructure/repositories/user/user.memory.repository'
+import { Messages } from '../../src/utils/constants/messages'
+import { StatusCodes } from '../../src/utils/constants/status-codes'
 import { usersMock } from '../../test/mocks/user.model.mock'
 
 describe('getUsersHttpAdapter', () => {

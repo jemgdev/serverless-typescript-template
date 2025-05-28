@@ -1,10 +1,10 @@
-import { handler } from '@handlers/get-users'
-import { getUsersHttpAdapter } from '@adapters/get-users.adapter'
-import { StatusCodes } from '@utils/constants/status-codes'
-import { MessageCodes } from "@utils/constants/message-codes"
-import { Messages } from "@utils/constants/messages"
+import { handler } from '../../src/handlers/get-users'
+import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
+import { StatusCodes } from '../../src/utils/constants/status-codes'
+import { MessageCodes } from "../../src/utils/constants/message-codes"
+import { Messages } from "../../src/utils/constants/messages"
 
-jest.mock('@adapters/get-users.adapter')
+jest.mock('../../src/adapters/get-users.adapter')
 
 describe('handler - getUsers', () => {
   const mockResponse = {

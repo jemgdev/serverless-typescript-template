@@ -14,13 +14,6 @@ module.exports = {
     '<rootDir>/build/',
     '<rootDir>/dist/',
   ],
-  moduleNameMapper: {
-    '^@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '^@core/(.*)$': '<rootDir>/src/core/$1',
-    '^@handlers/(.*)$': '<rootDir>/src/handlers/$1',
-    '^@adapters/(.*)$': '<rootDir>/src/adapters/$1',
-    '^@utils/(.*)$': '<rootDir>/src/utils/$1'
-  },
   coverageThreshold: {
     global: {
       statements: 80,

@@ -1,6 +1,6 @@
-import { Messages } from '@utils/constants/messages'
-import { UserMemoryRepository } from '@core/infrastructure/repositories/user/user.memory.repository'
-import { GetUsersUseCase } from '@core/usecases/get-users.usecase'
+import { Messages } from '../../../src/utils/constants/messages'
+import { UserMemoryRepository } from '../../../src/core/infrastructure/repositories/user/user.memory.repository'
+import { GetUsersUseCase } from '../../../src/core/usecases/get-users.usecase'
 import { usersMock } from '../../mocks/user.model.mock'
 
 describe('GetUsersUseCase', () => {

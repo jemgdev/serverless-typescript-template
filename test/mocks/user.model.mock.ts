@@ -1,4 +1,4 @@
-import { UserModel } from '@core/domain/models/user.model'
+import { UserModel } from '../../src/core/domain/models/user.model'
 
 export const usersMock: UserModel[] = [
   {

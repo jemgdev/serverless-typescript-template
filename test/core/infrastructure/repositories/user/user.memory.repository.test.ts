@@ -1,4 +1,4 @@
-import { UserMemoryRepository } from '@core/infrastructure/repositories/user/user.memory.repository'
+import { UserMemoryRepository } from '../../../../../src/core/infrastructure/repositories/user/user.memory.repository'
 import { usersMock } from '../../../../mocks/user.model.mock'
 
 describe('UserMemoryRepository', () => {

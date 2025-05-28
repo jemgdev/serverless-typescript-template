@@ -1,9 +1,9 @@
-import { GetUsersUseCase } from '@core/usecases/get-users.usecase'
-import { responseMessage } from '@utils/response-message'
-import { Messages } from '@utils/constants/messages'
-import { StatusCodes } from '@utils/constants/status-codes'
-import { UserModel } from '@core/domain/models/user.model'
-import { MessageCodes } from "@utils/constants/message-codes"
+import { GetUsersUseCase } from '../core/usecases/get-users.usecase'
+import { responseMessage } from '../utils/response-message'
+import { Messages } from '../utils/constants/messages'
+import { StatusCodes } from '../utils/constants/status-codes'
+import { UserModel } from '../core/domain/models/user.model'
+import { MessageCodes } from "../utils/constants/message-codes"
 
 export const getUsersHttpAdapter = async (
   useCase: GetUsersUseCase
