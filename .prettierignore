@@ -1,0 +1,7 @@
+# Ignore artifacts:
+node_modules
+coverage
+
+# Ignore all HTML files:
+**/*.{yml|yaml}
+**/*.md

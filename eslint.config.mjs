@@ -1,7 +1,7 @@
-import jestPlugin from 'eslint-plugin-jest';
-import tseslint from 'typescript-eslint';
-import eslint from '@eslint/js';
-import globals from 'globals';
+import jestPlugin from 'eslint-plugin-jest'
+import tseslint from 'typescript-eslint'
+import eslint from '@eslint/js'
+import globals from 'globals'
 
 export default tseslint.config(
   tseslint.configs.recommended,
@@ -14,6 +14,7 @@ export default tseslint.config(
       'undefinded',
       'coverage',
       'dist',
+      'build'
     ],
   },
   {
@@ -34,6 +35,10 @@ export default tseslint.config(
     },
   },
   {
+    env: {
+      node: true,
+      jest: true,
+    },
     rules: {
       SemicolonPreference: 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
@@ -46,8 +51,8 @@ export default tseslint.config(
           caughtErrors: 'none',
         },
       ],
-      'no-console': ['warn', { allow: ['warn'] }],
+      'no-console': ['warn', { allow: ['log', 'warn'] }],
       'no-unused-vars': 'off',
     },
   },
-);
+)

@@ -6,19 +6,16 @@
     "removeComments": true,
     "module": "CommonJS",
     "declaration": true,
-    "strict": false,
-    "target": "ES5",
-    "sourceMap": false,
-    "baseUrl": "./src",
+    "strict": true,
+    "target": "ES2024",
+    "sourceMap": true,
+    "baseUrl": "./",
     "outDir": "./dist",
     "paths": {
-      "@domain/*": ["./domain/*"],
-      "@infrastructure/*": ["./infrastructure/*"],
-      "@usecases/*": ["./usecases/*"],
-      "@utils/*": ["./utils/*"],
-      "@*": ["*"]
+      "@": ["src"],
+      "@*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "dist", "test"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

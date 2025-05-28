@@ -1,4 +1,4 @@
-import { UserModel } from "../../src/domain/models/user.model";
+import { UserModel } from '@core/domain/models/user.model'
 
 export const usersMock: UserModel[] = [
   {
@@ -6,6 +6,6 @@ export const usersMock: UserModel[] = [
     identificationNumber: '38739393',
     identificationType: 'DNI',
     lastname: 'Medina',
-    name: 'Josué'
-  }
+    name: 'Josué',
+  },
 ]

@@ -3,8 +3,9 @@ module.exports = {
   testMatch: ['<rootDir>/test/**/*.test.ts'],
   testEnvironment: 'node',
   preset: 'ts-jest',
-  collectCoverageFrom: [
-    '<rootDir>/src/**/*.ts',
+  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/.serverless/'
   ],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
@@ -15,9 +16,10 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@domain/(.*)$': '<rootDir>/src/domain/$1',
-    '^@usecases/(.*)$': '<rootDir>/src/usecases/$1',
-    '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
-    '^@utils/(.*)$': '<rootDir>/src/utils/$1',
+    '^@core/(.*)$': '<rootDir>/src/core/$1',
+    '^@handlers/(.*)$': '<rootDir>/src/handlers/$1',
+    '^@adapters/(.*)$': '<rootDir>/src/adapters/$1',
+    '^@utils/(.*)$': '<rootDir>/src/utils/$1'
   },
   coverageThreshold: {
     global: {
@@ -27,4 +29,8 @@ module.exports = {
       lines: 80,
     },
   },
-};
+  silent: false,
+  detectOpenHandles: true,
+  verbose: true,
+  cache: false,
+}

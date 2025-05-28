@@ -1,7 +1,7 @@
-import { Messages } from '../../src/utils/constants/messages'
-import { UserMemoryRepository } from '../../src/infrastructure/repositories/user/user.memory.repository'
-import { GetUsersUseCase } from '../../src/usecases/get-users.usecase'
-import { usersMock } from '../mocks/user.model.mock'
+import { Messages } from '@utils/constants/messages'
+import { UserMemoryRepository } from '@core/infrastructure/repositories/user/user.memory.repository'
+import { GetUsersUseCase } from '@core/usecases/get-users.usecase'
+import { usersMock } from '../../mocks/user.model.mock'
 
 describe('GetUsersUseCase', () => {
   let userRepository: UserMemoryRepository
@@ -11,8 +11,7 @@ describe('GetUsersUseCase', () => {
   })
 
   it('Should return a valid user', async () => {
-    jest.spyOn(userRepository, 'getAllUsers')
-      .mockResolvedValue(usersMock)
+    jest.spyOn(userRepository, 'getAllUsers').mockResolvedValue(usersMock)
 
     const getUserUseCase = new GetUsersUseCase(userRepository)
     const usersFound = await getUserUseCase.invoke()
@@ -21,13 +20,14 @@ describe('GetUsersUseCase', () => {
   })
 
   it('Should throw an service unavailable error when repository throws an unavailable error', async () => {
-    jest.spyOn(userRepository, 'getAllUsers')
+    jest
+      .spyOn(userRepository, 'getAllUsers')
       .mockRejectedValue(new Error(Messages.SERVICE_UNAVAILABLE))
 
     const getUserUseCase = new GetUsersUseCase(userRepository)
-    
-    await expect(getUserUseCase.invoke())
-      .rejects
-      .toThrow(Messages.SERVICE_UNAVAILABLE)
+
+    await expect(getUserUseCase.invoke()).rejects.toThrow(
+      Messages.SERVICE_UNAVAILABLE,
+    )
   })
 })

@@ -1,9 +1,9 @@
 service: serverless-typescript-template
-frameworkVersion: "4"
+frameworkVersion: '4'
 
 provider:
   name: aws
-  runtime: nodejs16.x
+  runtime: nodejs22.x
   region: ${param:region}
   environment:
     STAGE: ${param:stage}
@@ -12,14 +12,9 @@ provider:
 plugins:
   - serverless-offline
 
-package:
-  exclude:
-    - src/**/*.ts
-    - test
-
 functions:
   get-users:
-    handler: src/infrastructure/handlers/get-users.handler
+    handler: src/handlers/get-users.handler
     events:
       - http:
           path: get-users

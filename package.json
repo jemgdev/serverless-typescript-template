@@ -6,8 +6,8 @@
     "dev": "serverless offline --config serverless.offline.yml --param='stage=dev' --param='region=us-east-1'",
     "build": "tsc",
     "test": "jest test --no-cache --coverage --runInBand",
+    "format": "npx prettier . --check --write",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
     "deploy": "serverless deploy --param='stage=dev' --param='region=us-east-1' --verbose"
   },
   "keywords": [],
@@ -29,6 +29,7 @@
     "ts-jest": "29.2.5",
     "ts-node": "10.9.2",
     "typescript": "5.7.2",
-    "typescript-eslint": "8.32.0"
+    "typescript-eslint": "8.32.0",
+    "prettier": "3.5.3"
   }
 }
