@@ -1,5 +1,5 @@
 import { Messages } from '../../../src/utils/constants/messages'
-import { UserMemoryRepository } from '../../../src/core/infrastructure/repositories/user/user.memory.repository'
+import { UserMemoryRepository } from '../../../src/core/infrastructure/repositories/user.memory.repository'
 import { GetUsersUseCase } from '../../../src/core/usecases/get-users.usecase'
 import { usersMock } from '../../mocks/user.model.mock'
 

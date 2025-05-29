@@ -4,9 +4,7 @@ module.exports = {
   testEnvironment: 'node',
   preset: 'ts-jest',
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
-  modulePathIgnorePatterns: [
-    '<rootDir>/.serverless/'
-  ],
+  modulePathIgnorePatterns: ['<rootDir>/.serverless/'],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.serverless/',

@@ -30,7 +30,7 @@ package:
 
 functions:
   get-users:
-    handler: dist/handlers/get-users.handler
+    handler: dist/handlers/get-users-http.handler
     events:
       - http:
           path: get-users

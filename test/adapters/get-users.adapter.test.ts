@@ -1,6 +1,6 @@
 import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
 import { GetUsersUseCase } from '../../src/core/usecases/get-users.usecase'
-import { UserMemoryRepository } from '../../src/core/infrastructure/repositories/user/user.memory.repository'
+import { UserMemoryRepository } from '../../src/core/infrastructure/repositories/user.memory.repository'
 import { Messages } from '../../src/utils/constants/messages'
 import { StatusCodes } from '../../src/utils/constants/status-codes'
 import { usersMock } from '../../test/mocks/user.model.mock'
@@ -14,9 +14,7 @@ describe('getUsersHttpAdapter', () => {
   })
 
   it('debe retornar 200 y la lista de usuarios si todo sale bien', async () => {
-    jest
-      .spyOn(getUsersUseCase, 'invoke')
-      .mockResolvedValue(usersMock)
+    jest.spyOn(getUsersUseCase, 'invoke').mockResolvedValue(usersMock)
 
     const result = await getUsersHttpAdapter(getUsersUseCase)
 

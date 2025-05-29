@@ -1,12 +1,13 @@
-import { handler } from '../../src/handlers/get-users'
+import { APIGatewayProxyEventV2 } from 'aws-lambda'
+import { handler } from '../../src/handlers/get-users-http'
 import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
 import { StatusCodes } from '../../src/utils/constants/status-codes'
-import { MessageCodes } from "../../src/utils/constants/message-codes"
-import { Messages } from "../../src/utils/constants/messages"
+import { MessageCodes } from '../../src/utils/constants/message-codes'
+import { Messages } from '../../src/utils/constants/messages'
 
 jest.mock('../../src/adapters/get-users.adapter')
 
-describe('handler - getUsers', () => {
+describe('getUsersHttp', () => {
   const mockResponse = {
     statusCode: StatusCodes.OPERATION_SUCCESSFULL,
     body: [{ id: '1', username: 'test-user' }],
@@ -17,24 +18,36 @@ describe('handler - getUsers', () => {
   })
 
   it('should return successful response from getUsersHttpAdapter', async () => {
-    (getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse)
+    ;(getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse)
 
-    const result = await handler()
+    // @ts-expect-error only for testing purposes
+    const event: APIGatewayProxyEventV2 = {
+      headers: {},
+      body: JSON.stringify({}),
+    }
+
+    const result = await handler(event)
 
     expect(getUsersHttpAdapter).toHaveBeenCalled()
     expect(result).toEqual(mockResponse)
   })
 
   it('should return error response if getUsersHttpAdapter throws', async () => {
-    (getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
+    ;(getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
 
-    const result = await handler()
+    // @ts-expect-error only for testing purposes
+    const event: APIGatewayProxyEventV2 = {
+      headers: {},
+      body: JSON.stringify({}),
+    }
+
+    const result = await handler(event)
 
     expect(result).toEqual({
       statusCode: StatusCodes.UNCONTROLLER_ERROR,
       body: JSON.stringify({
         code: MessageCodes.UNCONTROLLER_ERROR,
-        message: Messages.UNCONTROLLER_ERROR
+        message: Messages.UNCONTROLLER_ERROR,
       }),
       headers: {
         'Content-Type': 'application/json',

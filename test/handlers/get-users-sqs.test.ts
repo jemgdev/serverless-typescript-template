@@ -1,0 +1,71 @@
+import { SQSEvent } from 'aws-lambda'
+import { handler } from '../../src/handlers/get-users-sqs'
+import { StatusCodes } from '../../src/utils/constants/status-codes'
+import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
+
+jest.mock('../../src/adapters/get-users.adapter')
+
+describe('getUsersSqs', () => {
+  const mockResponse = {
+    statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+    body: [{ id: '1', username: 'test-user' }],
+  }
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('Should return OPERATION_SUCCESSFULL', async () => {
+    ;(getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse)
+
+    const event: SQSEvent = {
+      Records: [
+        {
+          messageId: '1',
+          receiptHandle: 'handle1',
+          body: JSON.stringify({ message: 'test' }),
+          // @ts-expect-error only for testing purposes
+          attributes: {},
+          messageAttributes: {},
+          md5OfBody: 'md5',
+          eventSource: 'aws:sqs',
+          eventSourceARN: 'arn:aws:sqs:region:account-id:queue-name',
+          awsRegion: 'us-east-1',
+        },
+      ],
+    }
+
+    const response = await handler(event)
+
+    expect(response.batchItemFailures).toStrictEqual([])
+  })
+
+  it('Should return UNCONTROLLER_ERROR', async () => {
+    ;(getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
+
+    const event: SQSEvent = {
+      Records: [
+        {
+          messageId: '1',
+          receiptHandle: 'handle1',
+          body: JSON.stringify({ message: 'test' }),
+          // @ts-expect-error only for testing purposes
+          attributes: {},
+          messageAttributes: {},
+          md5OfBody: 'md5',
+          eventSource: 'aws:sqs',
+          eventSourceARN: 'arn:aws:sqs:region:account-id:queue-name',
+          awsRegion: 'us-east-1',
+        },
+      ],
+    }
+
+    const response = await handler(event)
+
+    expect(response.batchItemFailures).toStrictEqual([
+      {
+        itemIdentifier: '1',
+      },
+    ])
+  })
+})

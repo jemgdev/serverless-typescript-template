@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
-import { bodyParser, headerParser, sqsParser } from '@utils/parsers'
+import { bodyParser, headerParser, sqsParser } from '../../src/utils/parsers'
 
 describe('bodyParser', () => {
   it('should parse JSON body correctly', () => {
@@ -31,7 +31,9 @@ describe('headerParser', () => {
       },
     } as APIGatewayProxyEventV2
 
-    const result = headerParser<{ 'x-api-key': string; authorization: string }>(event)
+    const result = headerParser<{ 'x-api-key': string; authorization: string }>(
+      event,
+    )
     expect(result).toEqual({
       'x-api-key': '12345',
       authorization: 'Bearer token',

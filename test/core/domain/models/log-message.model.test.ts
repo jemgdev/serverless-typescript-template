@@ -7,7 +7,7 @@ describe('LogMessage', () => {
       lastname: '',
       age: 0,
       identificationNumber: '',
-      identificationType: ''
+      identificationType: '',
     }
 
     expect(user.name).toEqual('')

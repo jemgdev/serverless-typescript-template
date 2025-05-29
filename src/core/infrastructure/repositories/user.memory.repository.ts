@@ -1,6 +1,6 @@
-import { UserModel } from '../../../../core/domain/models/user.model'
-import { IUserRepository } from '../../../../core/domain/repositories/user.repository.interface'
 import { Loggerfy } from 'loggerfy'
+import { UserModel } from '../../domain/models/user.model'
+import { IUserRepository } from '../../domain/repositories/user.repository.interface'
 
 export class UserMemoryRepository implements IUserRepository {
   logger: Loggerfy

@@ -14,7 +14,7 @@ export default tseslint.config(
       'undefinded',
       'coverage',
       'dist',
-      'build'
+      'build',
     ],
   },
   {
@@ -45,12 +45,7 @@ export default tseslint.config(
       '@typescript-eslint/no-undef': 'off',
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          caughtErrors: 'none',
-        },
-      ],
+      '@typescript-eslint/no-unused-vars': 'error',
       'no-console': ['warn', { allow: ['log', 'warn'] }],
       'no-unused-vars': 'off',
     },
