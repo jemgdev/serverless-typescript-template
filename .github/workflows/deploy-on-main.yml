@@ -33,5 +33,4 @@ jobs:
         run: |
           serverless deploy --verbose \
             --param="stage=${{ secrets.STAGE }}" \
-            --param="region=${{ secrets.REGION }}" \
-            --param="dynamo_table_name=${{ secrets.DYNAMO_TABLE_NAME }}"
+            --param="region=${{ secrets.REGION }}"
