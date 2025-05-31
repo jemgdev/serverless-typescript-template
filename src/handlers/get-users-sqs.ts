@@ -3,7 +3,7 @@ import { Loggerfy } from 'loggerfy'
 import { UserModel } from '../core/domain/models/user.model'
 import { GetUsersUseCase } from '../core/usecases/get-users.usecase'
 import { UserMemoryRepository } from '../core/infrastructure/repositories/user.memory.repository'
-import { getUsersHttpAdapter } from '../adapters/get-users.adapter'
+import { getUsersSqsAdapter } from '../adapters/get-users-sqs.adapter'
 import { sqsParser } from '../utils/parsers'
 
 const logger = new Loggerfy()
@@ -28,7 +28,7 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
   await Promise.all(
     payload.map(async (data) => {
       try {
-        const response = await getUsersHttpAdapter(getUsersUseCase)
+        const response = await getUsersSqsAdapter(getUsersUseCase, data.body)
 
         return response
       } catch (error) {

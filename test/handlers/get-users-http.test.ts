@@ -1,11 +1,11 @@
 import { APIGatewayProxyEventV2 } from 'aws-lambda'
 import { handler } from '../../src/handlers/get-users-http'
-import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
+import { getUsersHttpAdapter } from '../../src/adapters/get-users-http.adapter'
 import { StatusCodes } from '../../src/utils/constants/status-codes'
 import { MessageCodes } from '../../src/utils/constants/message-codes'
 import { Messages } from '../../src/utils/constants/messages'
 
-jest.mock('../../src/adapters/get-users.adapter')
+jest.mock('../../src/adapters/get-users-http.adapter')
 
 describe('getUsersHttp', () => {
   const mockResponse = {

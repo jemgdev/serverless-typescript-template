@@ -1,9 +1,9 @@
 import { SQSEvent } from 'aws-lambda'
 import { handler } from '../../src/handlers/get-users-sqs'
 import { StatusCodes } from '../../src/utils/constants/status-codes'
-import { getUsersHttpAdapter } from '../../src/adapters/get-users.adapter'
+import { getUsersSqsAdapter } from '../../src/adapters/get-users-sqs.adapter'
 
-jest.mock('../../src/adapters/get-users.adapter')
+jest.mock('../../src/adapters/get-users-sqs.adapter')
 
 describe('getUsersSqs', () => {
   const mockResponse = {
@@ -16,7 +16,7 @@ describe('getUsersSqs', () => {
   })
 
   it('Should return OPERATION_SUCCESSFULL', async () => {
-    ;(getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse)
+    (getUsersSqsAdapter as jest.Mock).mockResolvedValue(mockResponse)
 
     const event: SQSEvent = {
       Records: [
@@ -41,7 +41,7 @@ describe('getUsersSqs', () => {
   })
 
   it('Should return UNCONTROLLER_ERROR', async () => {
-    ;(getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
+    (getUsersSqsAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
 
     const event: SQSEvent = {
       Records: [

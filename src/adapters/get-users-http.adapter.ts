@@ -4,9 +4,30 @@ import { Messages } from '../utils/constants/messages'
 import { StatusCodes } from '../utils/constants/status-codes'
 import { UserModel } from '../core/domain/models/user.model'
 import { MessageCodes } from '../utils/constants/message-codes'
+import { APIGatewayProxyEventV2 } from "aws-lambda"
+import { bodyParser, headerParser } from "../utils/parsers"
+import { Loggerfy } from "loggerfy"
 
-export const getUsersHttpAdapter = async (useCase: GetUsersUseCase) => {
+const logger = new Loggerfy()
+
+export const getUsersHttpAdapter = async (
+  event: APIGatewayProxyEventV2,
+  useCase: GetUsersUseCase
+) => {
   try {
+    logger
+      .info()
+      .setCode('getUsersHttpAdapter')
+      .setDetail('Event data')
+      .setMessage('Processing HTTP event data')
+      .setMetadata({
+        event
+      })
+      .write()
+
+    headerParser<unknown>(event)
+    bodyParser<unknown>(event)
+
     const usersFound = await useCase.invoke()
 
     return responseMessage<{
@@ -23,6 +44,16 @@ export const getUsersHttpAdapter = async (useCase: GetUsersUseCase) => {
     })
   } catch (err) {
     const error = err as Error
+    logger
+      .error()
+      .setCode('getUsersHttpAdapter')
+      .setDetail('Error processing request')
+      .setMessage('Error processing request')
+      .setMetadata({
+        message: error.message
+      })
+      .write()
+
     if (error.message === Messages.SERVICE_UNAVAILABLE) {
       return responseMessage<{
         code: string
