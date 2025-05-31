@@ -28,9 +28,39 @@ package:
     - serverless.offline.yml
     - tsconfig.json
 
+resources:
+  Resources:
+    GetUsersRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: get-users-role
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service: lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: get-users-policy
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource: '*'
+
 functions:
   get-users:
     handler: dist/handlers/get-users-http.handler
+    role: GetUsersRole
+    timeout: 30
+    memorySize: 128
+    description: Get users from the database
     events:
       - http:
           path: /v1/users
