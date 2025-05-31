@@ -63,5 +63,5 @@ functions:
     description: Get users from the database
     events:
       - http:
-          path: /v1/users
+          path: /api/v1/users
           method: get

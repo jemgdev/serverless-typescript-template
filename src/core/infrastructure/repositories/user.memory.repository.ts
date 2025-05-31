@@ -1,8 +1,8 @@
 import { Loggerfy } from 'loggerfy'
 import { UserModel } from '../../domain/models/user.model'
-import { IUserRepository } from '../../domain/repositories/user.repository.interface'
+import { UserRepository } from "../../domain/repositories/user.repository"
 
-export class UserMemoryRepository implements IUserRepository {
+export class UserMemoryRepository implements UserRepository {
   logger: Loggerfy
 
   constructor() {

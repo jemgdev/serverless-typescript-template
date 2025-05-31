@@ -2,13 +2,13 @@ import { responseMessage } from '../../src/utils/response-message'
 import { StatusCodes } from '../../src/utils/constants/status-codes'
 import { Loggerfy } from 'loggerfy'
 import { GetUsersUseCase } from "../../src/core/usecases/get-users.usecase"
-import { IUserRepository } from "../../src/core/domain/repositories/user.repository.interface"
+import { UserRepository } from "../../src/core/domain/repositories/user.repository"
 import { UserMemoryRepository } from "../../src/core/infrastructure/repositories/user.memory.repository"
 import { getUsersSqsAdapter } from "../../src/adapters/get-users-sqs.adapter"
 import { UserModel } from "../../src/core/domain/models/user.model"
 
 describe('getUsersSqsAdapter', () => {
-  let userRepository: IUserRepository
+  let userRepository: UserRepository
   let getUsersUseCase: GetUsersUseCase
   let logger: Loggerfy
 
