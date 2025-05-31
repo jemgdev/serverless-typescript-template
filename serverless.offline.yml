@@ -14,8 +14,8 @@ plugins:
 
 functions:
   get-users:
-    handler: dist/handlers/get-users.handler
+    handler: src/handlers/get-users-http.handler
     events:
       - http:
-          path: get-users
+          path: /api/v1/users
           method: get
