@@ -33,7 +33,7 @@ resources:
     GetUsersRole:
       Type: AWS::IAM::Role
       Properties:
-        RoleName: get-users-role
+        RoleName: get-users-role-${opt:stage}
         AssumeRolePolicyDocument:
           Version: '2012-10-17'
           Statement:
