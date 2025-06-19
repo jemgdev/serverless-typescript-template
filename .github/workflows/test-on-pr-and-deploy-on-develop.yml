@@ -1,4 +1,4 @@
-name: Execute Tests
+name: Execute tests and deploy Serverless to AWS
 
 on:
   pull_request:
