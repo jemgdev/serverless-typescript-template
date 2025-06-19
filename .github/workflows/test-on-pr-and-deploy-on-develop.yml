@@ -1,4 +1,4 @@
-name: Execute Tests
+name: Execute tests and deploy Serverless to AWS
 
 on:
   pull_request:
@@ -20,6 +20,7 @@ jobs:
       - name: Run tests
         run: npm run test
   deploy:
+    needs: test
     environment: dev
     runs-on: ubuntu-latest
     steps:
