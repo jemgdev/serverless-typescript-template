@@ -4,10 +4,10 @@ frameworkVersion: '4'
 provider:
   name: aws
   runtime: nodejs22.x
-  region: ${param:region}
+  region: ${opt:region}
   environment:
-    STAGE: ${param:stage}
-    REGION: ${param:region}
+    STAGE: ${opt:stage}
+    REGION: ${opt:region}
 
 plugins:
   - serverless-offline
