@@ -7,7 +7,7 @@ import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
  */
 export function queryParser<T> (event: APIGatewayProxyEventV2): T {
   // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return (event.queryStringParameters !== null) ? (event.queryStringParameters as T) : ({} as T)
+  return event.queryStringParameters !== undefined ? (event.queryStringParameters as T) : ({} as T)
 }
 
 /**
