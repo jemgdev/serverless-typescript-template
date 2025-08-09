@@ -1,5 +1,5 @@
 service: serverless-typescript-template
-frameworkVersion: '3'
+frameworkVersion: "3"
 
 provider:
   name: aws
@@ -12,22 +12,6 @@ provider:
 plugins:
   - serverless-offline
 
-package:
-  exclude:
-    - .github
-    - .serverless
-    - coverage
-    - src
-    - test
-    - .gitignore
-    - eslint.config.js
-    - jest.config.js
-    - LICENSE
-    - README.md
-    - serverless.yml
-    - serverless.offline.yml
-    - tsconfig.json
-
 resources:
   Resources:
     GetUsersRole:
@@ -35,7 +19,7 @@ resources:
       Properties:
         RoleName: get-users-role-${opt:stage}
         AssumeRolePolicyDocument:
-          Version: '2012-10-17'
+          Version: "2012-10-17"
           Statement:
             - Effect: Allow
               Principal:
@@ -45,21 +29,21 @@ resources:
         Policies:
           - PolicyName: get-users-policy
             PolicyDocument:
-              Version: '2012-10-17'
+              Version: "2012-10-17"
               Statement:
                 - Effect: Allow
                   Action:
                     - logs:CreateLogGroup
                     - logs:CreateLogStream
                     - logs:PutLogEvents
-                  Resource: '*'
+                  Resource: "*"
 
 functions:
   get-users:
     handler: dist/handlers/get-users-http.handler
     role: GetUsersRole
-    timeout: 30
-    memorySize: 128
+    timeout: 29
+    memorySize: 64
     description: Get users from the database
     events:
       - http:
