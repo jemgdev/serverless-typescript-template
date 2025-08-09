@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        run: npm i
+        run: npm ci --only=production
       - name: Build the project
         run: npm run build
       - name: Install Serverless Framework
