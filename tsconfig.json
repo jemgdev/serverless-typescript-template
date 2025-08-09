@@ -9,7 +9,7 @@
     "strict": true,
     "target": "ES2024",
     "sourceMap": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "outDir": "./dist"
   },
   "include": ["src/**/*"],
