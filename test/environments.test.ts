@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Environments } from '../src/environments'
 
 describe('Environments', () => {

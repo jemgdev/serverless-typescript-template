@@ -1,5 +1,28 @@
 import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
-import { bodyParser, headerParser, sqsParser } from '../../src/utils/parsers'
+import { queryParser, bodyParser, headerParser, sqsParser } from '../../src/utils/parsers'
+
+describe('queryParser', () => {
+  it('should parse query string parameters correctly', () => {
+    const event = {
+      queryStringParameters: {
+        name: 'user',
+        age: '30',
+      } as unknown,
+    } as APIGatewayProxyEventV2
+
+    const result = queryParser<{ name: string; age: string }>(event)
+    expect(result).toEqual({ name: 'user', age: '30' })
+  })
+
+  it('should return empty object if query string is undefined', () => {
+    const event = {
+      queryStringParameters: undefined,
+    } as APIGatewayProxyEventV2
+
+    const result = queryParser<{ anything?: string }>(event)
+    expect(result).toEqual({})
+  })
+})
 
 describe('bodyParser', () => {
   it('should parse JSON body correctly', () => {

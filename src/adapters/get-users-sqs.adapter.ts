@@ -2,14 +2,15 @@ import { Loggerfy } from 'loggerfy'
 import { GetUsersUseCase } from '../core/usecases/get-users.usecase'
 import { responseMessage } from '../utils/response-message'
 import { StatusCodes } from '../utils/constants/status-codes'
-import { UserModel } from "../core/domain/models/user.model"
+import { UserModel } from '../core/domain/models/user.model'
+import { APIGatewayProxyResultV2 } from 'aws-lambda'
 
 const logger = new Loggerfy()
 
 export const getUsersSqsAdapter = async (
   usecase: GetUsersUseCase,
-  message: unknown // Assuming message is of type unknown, adjust as necessary
-) => {
+  message: unknown
+): Promise<APIGatewayProxyResultV2> => {
   logger
     .info()
     .setCode('getUsersSqsAdapter')
@@ -25,7 +26,7 @@ export const getUsersSqsAdapter = async (
   return responseMessage<{
     areMessageRegistered: UserModel[]
   }>({
-    statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+    statusCode: StatusCodes.OPERATION_SUCCESSFUL,
     body: {
       areMessageRegistered
     }

@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { APIGatewayProxyEventV2 } from 'aws-lambda'
 import { handler } from '../../src/handlers/get-users-http'
 import { getUsersHttpAdapter } from '../../src/adapters/get-users-http.adapter'
@@ -9,7 +10,7 @@ jest.mock('../../src/adapters/get-users-http.adapter')
 
 describe('getUsersHttp', () => {
   const mockResponse = {
-    statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+    statusCode: StatusCodes.OPERATION_SUCCESSFUL,
     body: [{ id: '1', username: 'test-user' }],
   }
 
@@ -18,7 +19,7 @@ describe('getUsersHttp', () => {
   })
 
   it('should return successful response from getUsersHttpAdapter', async () => {
-    ;(getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse)
+    ; (getUsersHttpAdapter as jest.Mock).mockResolvedValue(mockResponse as never)
 
     // @ts-expect-error only for testing purposes
     const event: APIGatewayProxyEventV2 = {
@@ -33,7 +34,7 @@ describe('getUsersHttp', () => {
   })
 
   it('should return error response if getUsersHttpAdapter throws', async () => {
-    ;(getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom'))
+    ; (getUsersHttpAdapter as jest.Mock).mockRejectedValue(new Error('Boom') as never)
 
     // @ts-expect-error only for testing purposes
     const event: APIGatewayProxyEventV2 = {

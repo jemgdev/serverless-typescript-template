@@ -10,18 +10,18 @@ module.exports = {
     '<rootDir>/.serverless/',
     '<rootDir>/undefined/',
     '<rootDir>/build/',
-    '<rootDir>/dist/',
+    '<rootDir>/dist/'
   ],
   coverageThreshold: {
     global: {
       statements: 80,
       functions: 80,
       branches: 80,
-      lines: 80,
-    },
+      lines: 80
+    }
   },
   silent: false,
   detectOpenHandles: true,
   verbose: true,
-  cache: false,
+  cache: false
 }

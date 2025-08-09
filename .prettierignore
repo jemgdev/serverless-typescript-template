@@ -1,9 +1,0 @@
-# Ignore artifacts:
-node_modules
-coverage
-.github
-eslint.config.mjs
-
-# Ignore all HTML files:
-**/*.{yml|yaml}
-**/*.md

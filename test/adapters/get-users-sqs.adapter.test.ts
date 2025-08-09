@@ -46,7 +46,7 @@ describe('getUsersSqsAdapter', () => {
     expect(response).toStrictEqual(responseMessage<{
       areMessageRegistered: UserModel[]
     }>({
-      statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+      statusCode: StatusCodes.OPERATION_SUCCESSFUL,
       body: {
         areMessageRegistered: [
           {

@@ -10,18 +10,18 @@ import { APIGatewayProxyResultV2 } from 'aws-lambda'
  * @returns {APIGatewayProxyResultV2} An object representing the HTTP response with
  * headers, status code, and optional body.
  */
-export function responseMessage<T>({
+export function responseMessage<T> ({
   statusCode,
-  body,
+  body
 }: {
   statusCode: number
   body?: T
 }): APIGatewayProxyResultV2 {
   return {
     statusCode,
-    body: body ? JSON.stringify(body as T) : undefined,
+    body: body ? JSON.stringify(body) : undefined,
     headers: {
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   }
 }
