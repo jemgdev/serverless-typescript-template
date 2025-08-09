@@ -6,7 +6,8 @@ import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
  * @returns {T} The headers as an object.
  */
 export function queryParser<T> (event: APIGatewayProxyEventV2): T {
-  return (event.queryStringParameters != null) ? (event.queryStringParameters as T) : ({} as T)
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+  return (event.queryStringParameters !== null) ? (event.queryStringParameters as T) : ({} as T)
 }
 
 /**
@@ -15,6 +16,7 @@ export function queryParser<T> (event: APIGatewayProxyEventV2): T {
  * @returns {T} The parsed body as an object. Returns an empty object if the body is not present.
  */
 export function bodyParser<T> (event: APIGatewayProxyEventV2): T {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions, @typescript-eslint/strict-boolean-expressions
   return event.body ? (JSON.parse(event.body) as T) : ({} as T)
 }
 
