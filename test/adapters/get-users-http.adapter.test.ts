@@ -24,14 +24,14 @@ describe('getUsersHttpAdapter', () => {
     const result = await getUsersHttpAdapter(event, getUsersUseCase)
 
     // @ts-expect-error only for testing purposes
-    expect(result.statusCode).toBe(StatusCodes.OPERATION_SUCCESSFULL)
+    expect(result.statusCode).toBe(StatusCodes.OPERATION_SUCCESSFUL)
   })
 
   it('debe retornar 503 si ocurre un error con mensaje SERVICE_UNAVAILABLE', async () => {
     jest
       .spyOn(getUsersUseCase, 'invoke')
       .mockRejectedValue(new Error(Messages.SERVICE_UNAVAILABLE))
-    
+
     // @ts-expect-error only for testing purposes
     const event: APIGatewayProxyEventV2 = {
       headers: {},
@@ -48,7 +48,7 @@ describe('getUsersHttpAdapter', () => {
     jest
       .spyOn(getUsersUseCase, 'invoke')
       .mockRejectedValue(new Error('Error genérico'))
-    
+
     // @ts-expect-error only for testing purposes
     const event: APIGatewayProxyEventV2 = {
       headers: {},

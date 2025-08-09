@@ -5,11 +5,11 @@ import { UserRepository } from '../../domain/repositories/user.repository'
 export class UserMemoryRepository implements UserRepository {
   logger: Loggerfy
 
-  constructor() {
+  constructor () {
     this.logger = new Loggerfy()
   }
 
-  async getAllUsers(): Promise<UserModel[]> {
+  async getAllUsers (): Promise<UserModel[]> {
     const users: UserModel[] = [
       {
         name: 'Josué',

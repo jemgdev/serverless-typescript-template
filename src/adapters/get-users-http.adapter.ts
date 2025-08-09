@@ -4,7 +4,7 @@ import { Messages } from '../utils/constants/messages'
 import { StatusCodes } from '../utils/constants/status-codes'
 import { UserModel } from '../core/domain/models/user.model'
 import { MessageCodes } from '../utils/constants/message-codes'
-import { APIGatewayProxyEventV2 } from 'aws-lambda'
+import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { bodyParser, headerParser } from '../utils/parsers'
 import { Loggerfy } from 'loggerfy'
 
@@ -13,7 +13,7 @@ const logger = new Loggerfy()
 export const getUsersHttpAdapter = async (
   event: APIGatewayProxyEventV2,
   useCase: GetUsersUseCase
-) => {
+): Promise<APIGatewayProxyResultV2> => {
   try {
     logger
       .info()
@@ -35,7 +35,7 @@ export const getUsersHttpAdapter = async (
       message: string
       data: UserModel[]
     }>({
-      statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+      statusCode: StatusCodes.OPERATION_SUCCESSFUL,
       body: {
         code: MessageCodes.OPERATION_SUCCESSFUL,
         message: Messages.OPERATION_SUCCESSFUL,

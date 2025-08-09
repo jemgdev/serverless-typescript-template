@@ -15,6 +15,7 @@ package:
     - dist/**
     - node_modules/**
     - package.json
+    - '!.github/**'
     - '!src/**'
     - '!test/**'
     - '!.git/**'
@@ -22,6 +23,7 @@ package:
     - '!.vscode/**'
     - '!tsconfig.json'
     - '!jest.config.js'
+    - '!LICENSE'
 
 plugins:
   - serverless-offline

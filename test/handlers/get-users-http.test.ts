@@ -10,7 +10,7 @@ jest.mock('../../src/adapters/get-users-http.adapter')
 
 describe('getUsersHttp', () => {
   const mockResponse = {
-    statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+    statusCode: StatusCodes.OPERATION_SUCCESSFUL,
     body: [{ id: '1', username: 'test-user' }],
   }
 

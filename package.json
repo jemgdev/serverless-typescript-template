@@ -5,28 +5,37 @@
   "scripts": {
     "dev": "serverless offline --stage dev --region us-east-1",
     "build": "tsc",
+    "lint": "ts-standard",
+    "lint:fix": "ts-standard --fix",
     "test": "jest test --no-cache --coverage --runInBand",
-    "lint": "standard --parser @typescript-eslint/parser --plugin @typescript-eslint/eslint-plugin 'src/**/*.ts'",
-    "lint:fix": "npm run lint -- --fix",
-    "deploy": "tsc && serverless deploy --stage dev --region us-east-1 --verbose"
+    "deploy": "serverless deploy --stage dev --region us-east-1 --verbose"
   },
   "keywords": [],
   "author": "jemgdev",
   "license": "MIT",
-  "description": "",
+  "description": "A serverless typescript template",
   "dependencies": {
     "loggerfy": "1.1.4"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.152",
     "@types/jest": "30.0.0",
-    "globals": "16.3.0",
     "jest": "30.0.5",
     "serverless-offline": "14.4.0",
-    "standard": "^17.1.2",
     "ts-jest": "^29.4.1",
     "ts-node": "10.9.2",
+    "ts-standard": "12.0.2",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0"
+  },
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "dist",
+      "node_modules"
+    ],
+    "rules": {
+      "@typescript-eslint/strict-boolean-expressions": "off"
+    }
   }
 }

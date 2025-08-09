@@ -19,7 +19,7 @@ export function responseMessage<T> ({
 }): APIGatewayProxyResultV2 {
   return {
     statusCode,
-    body: body ? JSON.stringify(body as T) : undefined,
+    body: body ? JSON.stringify(body) : undefined,
     headers: {
       'Content-Type': 'application/json'
     }

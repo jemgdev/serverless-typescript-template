@@ -8,7 +8,7 @@ jest.mock('../../src/adapters/get-users-sqs.adapter')
 
 describe('getUsersSqs', () => {
   const mockResponse = {
-    statusCode: StatusCodes.OPERATION_SUCCESSFULL,
+    statusCode: StatusCodes.OPERATION_SUCCESSFUL,
     body: [{ id: '1', username: 'test-user' }],
   }
 
