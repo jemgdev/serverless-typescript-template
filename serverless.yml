@@ -3,7 +3,7 @@ frameworkVersion: "3"
 
 provider:
   name: aws
-  runtime: nodejs22.x
+  runtime: nodejs20.x
   region: ${opt:region}
   environment:
     STAGE: ${opt:stage}
@@ -43,7 +43,7 @@ functions:
     handler: dist/handlers/get-users-http.handler
     role: GetUsersRole
     timeout: 29
-    memorySize: 64
+    memorySize: 128
     description: Get users from the database
     events:
       - http:
