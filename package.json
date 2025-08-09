@@ -20,10 +20,11 @@
   "devDependencies": {
     "@types/aws-lambda": "8.10.152",
     "@types/jest": "30.0.0",
-    "eslint": "^8.57.1",
+    "@types/node": "24.2.1",
+    "eslint": "8.57.1",
     "jest": "30.0.5",
     "serverless-offline": "14.4.0",
-    "ts-jest": "^29.4.1",
+    "ts-jest": "29.4.1",
     "ts-node": "10.9.2",
     "ts-standard": "12.0.2",
     "typescript": "5.9.2",
