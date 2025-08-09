@@ -2,7 +2,7 @@ import { Loggerfy } from 'loggerfy'
 import { GetUsersUseCase } from '../core/usecases/get-users.usecase'
 import { responseMessage } from '../utils/response-message'
 import { StatusCodes } from '../utils/constants/status-codes'
-import { UserModel } from "../core/domain/models/user.model"
+import { UserModel } from '../core/domain/models/user.model'
 
 const logger = new Loggerfy()
 

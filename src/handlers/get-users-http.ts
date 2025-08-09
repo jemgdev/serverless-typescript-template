@@ -13,7 +13,7 @@ const userRepository = new UserMemoryRepository()
 const getUsersUseCase = new GetUsersUseCase(userRepository)
 
 export const handler = async (
-  event: APIGatewayProxyEventV2,
+  event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
   try {
     logger
@@ -22,10 +22,10 @@ export const handler = async (
       .setDetail('Event data')
       .setMessage('SQS event data')
       .setMetadata({
-        event,
+        event
       })
       .write()
-  
+
     const response = await getUsersHttpAdapter(event, getUsersUseCase)
     return response
   } catch (err) {
@@ -36,7 +36,7 @@ export const handler = async (
       .setDetail('Error processing request')
       .setMessage('Error processing request')
       .setMetadata({
-        message: error.message,
+        message: error.message
       })
       .write()
 
@@ -47,8 +47,8 @@ export const handler = async (
       statusCode: StatusCodes.UNCONTROLLER_ERROR,
       body: {
         code: MessageCodes.UNCONTROLLER_ERROR,
-        message: Messages.UNCONTROLLER_ERROR,
-      },
+        message: Messages.UNCONTROLLER_ERROR
+      }
     })
   }
 }

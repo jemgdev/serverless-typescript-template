@@ -1,3 +1,4 @@
+import { jest } from '@jest/globals';
 import { Messages } from '../../../src/utils/constants/messages'
 import { UserMemoryRepository } from '../../../src/core/infrastructure/repositories/user.memory.repository'
 import { GetUsersUseCase } from '../../../src/core/usecases/get-users.usecase'

@@ -17,7 +17,7 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
     .setDetail('Event data')
     .setMessage('SQS event data')
     .setMetadata({
-      event,
+      event
     })
     .write()
 
@@ -40,18 +40,18 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
           .setDetail('Error in logRegisterAdapter')
           .setMessage('Have an error in logRegisterAdapter: 29')
           .setMetadata({
-            message: err.message,
+            message: err.message
           })
           .write()
 
         failedMessageIds.push(data.messageId)
       }
-    }),
+    })
   )
 
   return {
     batchItemFailures: failedMessageIds.map((messageId) => ({
-      itemIdentifier: messageId,
-    })),
+      itemIdentifier: messageId
+    }))
   }
 }
