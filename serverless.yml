@@ -9,6 +9,20 @@ provider:
     STAGE: ${opt:stage}
     REGION: ${opt:region}
 
+package:
+  individually: true
+  patterns:
+    - dist/**
+    - node_modules/**
+    - package.json
+    - '!src/**'
+    - '!test/**'
+    - '!.git/**'
+    - '!*.md'
+    - '!.vscode/**'
+    - '!tsconfig.json'
+    - '!jest.config.js'
+
 plugins:
   - serverless-offline
 
