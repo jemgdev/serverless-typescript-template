@@ -1,16 +1,14 @@
 import { SQSEvent, SQSBatchResponse } from 'aws-lambda'
 import { Loggerfy } from 'loggerfy'
-import { UserModel } from '../core/domain/models/user.model'
-import { GetUsersUseCase } from '../core/usecases/get-users.usecase'
-import { UserMemoryRepository } from '../core/infrastructure/repositories/user.memory.repository'
-import { getUsersSqsAdapter } from '../adapters/get-users-sqs.adapter'
-import { sqsParser } from '../utils/parsers'
-
-const logger = new Loggerfy()
-const userRepository = new UserMemoryRepository()
-const getUsersUseCase = new GetUsersUseCase(userRepository)
+import { InMemoryUserRepository } from '../../../driven/InMemoryUserRepository'
+import { GetAllUsers } from '../../../../application/usecases/query/GetAllUsers'
+import { StatusCodes } from '../../../../../shared/utils/constants/status-codes'
+import { responseMessage } from '../../../../../shared/utils/response-message'
+import { sqsParser } from '../../../../../shared/utils/parsers'
+import { User } from '../../../../domain/User'
 
 export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
+  const logger = new Loggerfy()
   logger
     .info()
     .setCode('handler')
@@ -23,14 +21,24 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
 
   const failedMessageIds: string[] = []
 
-  const payload = sqsParser<UserModel>(event)
+  const payload = sqsParser<User>(event)
 
   await Promise.all(
     payload.map(async (data) => {
       try {
-        const response = await getUsersSqsAdapter(getUsersUseCase, data.body)
+        const userRepository = new InMemoryUserRepository()
+        const getAllUsers = new GetAllUsers(userRepository)
 
-        return response
+        const users = await getAllUsers.execute()
+        const finalUsers = users.map(user => user.toPrimitives())
+        return responseMessage<{
+          areMessageRegistered: any[]
+        }>({
+          statusCode: StatusCodes.OPERATION_SUCCESSFUL,
+          body: {
+            areMessageRegistered: finalUsers
+          }
+        })
       } catch (error) {
         const err = error as Error
 

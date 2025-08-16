@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "serverless offline --stage dev --region us-east-1",
+    "dev": "tsc && tsc-alias && serverless offline --stage dev --region us-east-1",
     "build": "tsc",
     "lint": "ts-standard",
     "lint:fix": "ts-standard --fix",
@@ -27,6 +27,7 @@
     "ts-jest": "29.4.1",
     "ts-node": "10.9.2",
     "ts-standard": "12.0.2",
+    "tsc-alias": "1.8.16",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0"
   },
