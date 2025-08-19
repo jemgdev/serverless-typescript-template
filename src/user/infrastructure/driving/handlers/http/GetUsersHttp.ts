@@ -6,7 +6,6 @@ import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
 import { Messages } from '@shared/utils/constants/Messages'
 import { Logger } from '@shared/libraries/logger/Logger'
-import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
 interface GetUsersHandlerDependencies {

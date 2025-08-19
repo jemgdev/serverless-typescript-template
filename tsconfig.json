@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "isolatedModules": true,
     "types": ["jest", "node"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
@@ -21,8 +22,6 @@
       "@user/application/*": ["user/application/*"],
       "@user/usecases/*": ["user/application/usecases/*"],
       "@user/ports/*": ["user/application/ports/*"],
-      
-      
       "@user/infrastructure/*": ["user/infrastructure/*"],
       "@user/driven/*": ["user/infrastructure/driven/*"],
       "@user/driving/*": ["user/infrastructure/driving/*"],

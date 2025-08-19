@@ -1,6 +1,6 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
-import { UserHttpMapper } from '../../mappers/UserHttpMapper'
+import { UserHttpMapper } from '@user/infrastructure/driving/mappers/UserHttpMapper'
 import { ICreateUserHttpResponse } from '@user/infrastructure/driving/dtos/ICreateUserHttpResponse'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
@@ -14,7 +14,6 @@ import { ValidationError } from '@shared/errors/ValidationError'
 import { ApplicationError } from '@shared/errors/ApplicationError'
 import { DomainError } from '@shared/errors/DomainError'
 import { InfrastructureError } from '@shared/errors/InfrastructureError'
-import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
 interface CreateUserHandlerDependencies {

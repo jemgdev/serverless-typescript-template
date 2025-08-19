@@ -3,7 +3,7 @@ import { DomainError } from '@shared/errors/DomainError'
 
 export class ID {
   private constructor (private readonly value: string) {
-    if (!value) throw new DomainError('ID must have a value')
+    if (value === '') throw new DomainError('ID must have a value')
     if (!ID.isUUID(value)) throw new DomainError('Invalid UUID format')
   }
 

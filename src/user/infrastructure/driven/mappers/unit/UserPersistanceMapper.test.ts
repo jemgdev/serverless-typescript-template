@@ -1,8 +1,7 @@
 
 import { UserPersistanceMapper } from '../UserPersistanceMapper'
-import { User } from '@user/domain/User'
-import { IUserPersistance } from '@user/infrastructure/driven/dtos/IUserPersistance'
-
+import { User } from '../../../../domain/User'
+import { IUserPersistance } from '../../dtos/IUserPersistance'
 // Mock the User module
 jest.mock('@user/domain/User', () => ({
   User: {
