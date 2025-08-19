@@ -58,8 +58,6 @@ The project is organized to reflect Hexagonal Architecture principles, separatin
 │               │   └── sqs/  # SQS message consumers.
 │               ├── mappers/ # Mappers to translate between request DTOs and application layer inputs.
 │               └── schemas/ # Validation schemas for incoming requests.
-├── dist/                   # Compiled JavaScript output
-├── node_modules/
 ├── serverless.yml          # Serverless Framework configuration
 ├── tsconfig.json           # TypeScript compiler configuration
 ├── package.json            # Project dependencies and scripts
