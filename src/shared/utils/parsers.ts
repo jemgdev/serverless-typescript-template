@@ -6,8 +6,10 @@ import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
  * @returns {T} The headers as an object.
  */
 export function queryParser<T> (event: APIGatewayProxyEventV2): T {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-  return event.queryStringParameters !== undefined ? (event.queryStringParameters as T) : ({} as T)
+  return event.queryStringParameters !== undefined && event.queryStringParameters !== null
+    ? (event.queryStringParameters as T)
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    : ({} as T)
 }
 
 /**
@@ -26,7 +28,10 @@ export function bodyParser<T> (event: APIGatewayProxyEventV2): T {
  * @returns {T} The headers as an object.
  */
 export function headerParser<T> (event: APIGatewayProxyEventV2): T {
-  return event.headers as T
+  return event.headers !== undefined && event.headers !== null
+    ? (event.headers as T)
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
+    : ({} as T)
 }
 
 /**

@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import { DomainError } from '../../../shared/errors/DomainError'
+import { DomainError } from '@shared/errors/DomainError'
 
 export class ID {
   private constructor (private readonly value: string) {

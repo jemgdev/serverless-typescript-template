@@ -1,6 +1,6 @@
 export interface ICreateUserHttpRequest {
   name: string
-  lastName: string
+  lastname: string
   age: number
   identificationType: string
   identificationNumber: string

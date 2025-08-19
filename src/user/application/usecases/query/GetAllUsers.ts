@@ -1,5 +1,5 @@
-import { User } from '../../../domain/User'
-import { UserPersistanceRepository } from '../../ports/UserPersistanceRepository'
+import { User } from '@user/domain/User'
+import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 
 export class GetAllUsers {
   constructor (private readonly userRepository: UserPersistanceRepository) {}

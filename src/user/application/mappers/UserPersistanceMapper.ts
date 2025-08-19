@@ -1,5 +1,5 @@
 import { User } from '@user/domain/User'
-import { IUserPersistance } from '../dtos/IUserPersistance'
+import { IUserPersistance } from '@user/dtos/IUserPersistance'
 
 export class UserPersistanceMapper {
   static toDomain (raw: IUserPersistance): User {

@@ -1,4 +1,4 @@
-import { User } from '../../domain/User'
+import { User } from '@user/domain/User'
 
 export interface UserPersistanceRepository {
   save: (user: User) => Promise<string>

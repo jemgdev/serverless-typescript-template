@@ -1,6 +1,6 @@
-import { Age } from './value-objects/Age'
-import { ID } from './value-objects/ID'
-import { IdentificationNumber } from './value-objects/IdentificationNumber'
+import { Age } from '@user/value-objects/Age'
+import { ID } from '@user/value-objects/ID'
+import { IdentificationNumber } from '@user/value-objects/IdentificationNumber'
 
 export class User {
   private constructor (
