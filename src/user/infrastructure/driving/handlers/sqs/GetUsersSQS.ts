@@ -1,23 +1,18 @@
 import { SQSEvent, SQSBatchResponse } from 'aws-lambda'
-import { Loggerfy } from 'loggerfy'
-import { InMemoryUserRepository } from '../../../driven/InMemoryUserRepository'
-import { GetAllUsers } from '../../../../application/usecases/query/GetAllUsers'
-import { StatusCodes } from '../../../../../shared/utils/constants/StatusCodes'
-import { responseMessage } from '../../../../../shared/utils/response-message'
-import { sqsParser } from '../../../../../shared/utils/parsers'
-import { User } from '../../../../domain/User'
+import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
+import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
+import { StatusCodes } from '@shared/utils/constants/StatusCodes'
+import { responseMessage } from '@shared/utils/response-message'
+import { sqsParser } from '@shared/utils/parsers'
+import { User } from '@user/domain/User'
+import { Logger } from '@shared/libraries/logger/Logger'
+
+const logger = new Logger()
 
 export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
-  const logger = new Loggerfy()
-  logger
-    .info()
-    .setCode('handler')
-    .setDetail('Event data')
-    .setMessage('SQS event data')
-    .setMetadata({
-      event
-    })
-    .write()
+  logger.info('Sqs event data', 'GET_USERS_SQS', 'Sqs event data', {
+    event
+  })
 
   const failedMessageIds: string[] = []
 
@@ -42,15 +37,9 @@ export const handler = async (event: SQSEvent): Promise<SQSBatchResponse> => {
       } catch (error) {
         const err = error as Error
 
-        logger
-          .error()
-          .setCode('logRegisterAdapter')
-          .setDetail('Error in logRegisterAdapter')
-          .setMessage('Have an error in logRegisterAdapter: 29')
-          .setMetadata({
-            message: err.message
-          })
-          .write()
+        logger.error('SQS event error', 'GET_USERS', 'SQS event error', {
+          message: err.message
+        })
 
         failedMessageIds.push(data.messageId)
       }

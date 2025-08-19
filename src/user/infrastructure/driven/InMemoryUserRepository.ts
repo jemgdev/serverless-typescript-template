@@ -1,8 +1,9 @@
-import { User } from '../../domain/User'
-import { UserPersistanceRepository } from '../../application/ports/UserPersistanceRepository'
+
+import { UserPersistanceRepository } from '@user/application/ports/UserPersistanceRepository'
 import { randomUUID } from 'crypto'
-import { UserPersistanceMapper } from '../../application/mappers/UserPersistanceMapper'
-import { IUserPersistance } from '../../application/dtos/IUserPersistance'
+import { UserPersistanceMapper } from '@user/application/mappers/UserPersistanceMapper'
+import { IUserPersistance } from '@user/application/dtos/IUserPersistance'
+import { User } from '@user/domain/User'
 
 export class InMemoryUserRepository implements UserPersistanceRepository {
   private readonly users = new Map<string, IUserPersistance>()

@@ -30,15 +30,5 @@
     "tsc-alias": "1.8.16",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0"
-  },
-  "ts-standard": {
-    "project": "./tsconfig.json",
-    "ignore": [
-      "dist",
-      "node_modules"
-    ],
-    "rules": {
-      "@typescript-eslint/strict-boolean-expressions": "off"
-    }
   }
 }

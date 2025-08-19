@@ -1,27 +1,21 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
-import { Loggerfy } from 'loggerfy'
 import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
 import { responseMessage } from '@shared/utils/response-message'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
 import { Messages } from '@shared/utils/constants/Messages'
+import { Logger } from '@shared/libraries/logger/Logger'
+
+const logger = new Logger()
 
 export const handler = async (
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
-  const logger = new Loggerfy()
-
   try {
-    logger
-      .info()
-      .setCode('handler')
-      .setDetail('Event data')
-      .setMessage('SQS event data')
-      .setMetadata({
-        event
-      })
-      .write()
+    logger.info('Http event data', 'GET_USERS', 'Http event data', {
+      event
+    })
 
     const userRepository = new InMemoryUserRepository()
     const getAllUsers = new GetAllUsers(userRepository)
@@ -43,15 +37,9 @@ export const handler = async (
     })
   } catch (err) {
     const error = err as Error
-    logger
-      .error()
-      .setCode('handler')
-      .setDetail('Error processing request')
-      .setMessage('Error processing request')
-      .setMetadata({
-        message: error.message
-      })
-      .write()
+    logger.error('Http event error', 'GET_USERS', 'Http event error', {
+      message: error.message
+    })
 
     return responseMessage<{
       code: string

@@ -14,10 +14,25 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {
+      // user
+      "@user/*": ["user/*"],
       "@user/domain/*": ["user/domain/*"],
+      "@user/value-objects/*": ["user/domain/value-objects/*"],
       "@user/application/*": ["user/application/*"],
+      "@user/usecases/*": ["user/application/usecases/*"],
+      "@user/ports/*": ["user/application/ports/*"],
+      "@user/mappers/*": ["user/application/mappers/*"],
+      "@user/dtos/*": ["user/application/dtos/*"],
       "@user/infrastructure/*": ["user/infrastructure/*"],
-      "@shared/*": ["shared/*"]
+      "@user/driven/*": ["user/infrastructure/driven/*"],
+      "@user/driving/*": ["user/infrastructure/driving/*"],
+
+      // shared
+      "@shared/*": ["shared/*"],
+      "@shared/libraries/*": ["shared/libraries/*"],
+      "@shared/logger/*": ["shared/libraries/logger/*"],
+      "@shared/utils/*": ["shared/utils/*"],
+      "@shared/constants/*": ["shared/utils/constants/*"]
     }
   },
   "include": ["src/**/*"],
