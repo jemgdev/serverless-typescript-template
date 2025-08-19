@@ -1,20 +1,19 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
-import { z } from 'zod'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
+import { UserHttpMapper } from '@user/application/mappers/UserHttpMapper'
+import { ICreateUserHttpResponse } from '@user/application/dtos/ICreateUserHttpResponse'
+import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
 import { bodyParser } from '@shared/utils/parsers'
-import { responseMessage } from '@shared/utils/response-message'
+import { responseMessage } from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
 import { Messages } from '@shared/utils/constants/Messages'
-import { UserHttpMapper } from '@user/application/mappers/UserHttpMapper'
-import { ICreateUserHttpResponse } from '@user/application/dtos/ICreateUserHttpResponse'
 import { Logger } from '@shared/libraries/logger/Logger'
-import { CreateUserSchema } from '../../schemas/CreateUserSchema'
-import { ValidationError } from '../../../../../shared/errors/ValidationError'
-import { ApplicationError } from '../../../../../shared/errors/ApplicationError'
-import { DomainError } from '../../../../../shared/errors/DomainError'
-import { InfrastructureError } from '../../../../../shared/errors/InfrastructureError'
+import { ValidationError } from '@shared/errors/ValidationError'
+import { ApplicationError } from '@shared/errors/ApplicationError'
+import { DomainError } from '@shared/errors/DomainError'
+import { InfrastructureError } from '@shared/errors/InfrastructureError'
 
 const logger = new Logger()
 const userRepository = new InMemoryUserRepository()
@@ -24,6 +23,10 @@ export const handler = async (
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
   try {
+    logger.info('Http event data', 'CREATE_USER', 'Http event data', {
+      event
+    })
+
     const body = bodyParser<{
       name: string
       lastname: string

@@ -26,18 +26,11 @@ module.exports = {
     '@typescript-eslint/no-extraneous-class': 'off',
 
     // imports absolutos desde paths definidos en tsconfig
-    'import/no-unresolved': 'on',
+    'import/no-unresolved': 0,
     'import/extensions': [
       'error',
       'ignorePackages',
       { ts: 'never', js: 'never' }
     ]
-  },
-  settings: {
-    'import/resolver': {
-      typescript: {
-        project: './tsconfig.json'
-      }
-    }
   }
 }

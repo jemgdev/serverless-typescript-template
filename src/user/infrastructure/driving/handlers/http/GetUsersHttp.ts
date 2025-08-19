@@ -1,7 +1,7 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
-import { responseMessage } from '@shared/utils/response-message'
+import { responseMessage } from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
 import { Messages } from '@shared/utils/constants/Messages'
