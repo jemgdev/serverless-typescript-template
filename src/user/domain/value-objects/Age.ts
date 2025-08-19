@@ -1,7 +1,9 @@
+import { DomainError } from '../../../shared/errors/DomainError'
+
 export class Age {
   private constructor (private readonly value: number) {
-    if (value <= 0) throw new Error('Age must be positive')
-    if (value > 120) throw new Error('Age seems unrealistic')
+    if (value <= 0) throw new DomainError('Age must be positive')
+    if (value > 120) throw new DomainError('Age seems unrealistic')
   }
 
   public static create (value: number): Age {

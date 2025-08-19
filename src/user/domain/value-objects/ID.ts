@@ -1,9 +1,10 @@
 import { randomUUID } from 'node:crypto'
+import { DomainError } from '../../../shared/errors/DomainError'
 
 export class ID {
   private constructor (private readonly value: string) {
-    if (!value) throw new Error('ID must have a value')
-    if (!ID.isUUID(value)) throw new Error('Invalid UUID format')
+    if (!value) throw new DomainError('ID must have a value')
+    if (!ID.isUUID(value)) throw new DomainError('Invalid UUID format')
   }
 
   public static create (): ID {

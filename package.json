@@ -15,7 +15,8 @@
   "license": "MIT",
   "description": "A serverless typescript template",
   "dependencies": {
-    "loggerfy": "1.1.4"
+    "loggerfy": "1.1.4",
+    "zod": "^4.0.17"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.152",
@@ -30,5 +31,15 @@
     "tsc-alias": "1.8.16",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0"
+  },
+  "ts-standard": {
+    "project": "./tsconfig.json",
+    "ignore": [
+      "dist",
+      "node_modules"
+    ],
+    "rules": {
+      "@typescript-eslint/strict-boolean-expressions": "off"
+    }
   }
 }

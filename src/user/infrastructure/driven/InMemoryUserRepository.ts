@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto'
 import { UserPersistanceMapper } from '@user/application/mappers/UserPersistanceMapper'
 import { IUserPersistance } from '@user/application/dtos/IUserPersistance'
 import { User } from '@user/domain/User'
+import { InfrastructureError } from '../../../shared/errors/InfrastructureError'
 
 export class InMemoryUserRepository implements UserPersistanceRepository {
   private readonly users = new Map<string, IUserPersistance>()
@@ -21,26 +22,41 @@ export class InMemoryUserRepository implements UserPersistanceRepository {
   }
 
   async save (user: User): Promise<string> {
-    this.users.set(
-      user.toPrimitives().id,
-      UserPersistanceMapper.toPersistence(user)
-    )
+    try {
+      this.users.set(
+        user.toPrimitives().id,
+        UserPersistanceMapper.toPersistence(user)
+      )
 
-    return user.toPrimitives().id
+      return user.toPrimitives().id
+    } catch (error) {
+      const err = error as Error
+      throw new InfrastructureError(err.message, 503)
+    }
   }
 
   async findById (id: string): Promise<User | null> {
-    const userFound = this.users.get(id)
+    try {
+      const userFound = this.users.get(id)
 
-    if (!userFound) {
-      return null
+      if (userFound == null) {
+        return null
+      }
+
+      return UserPersistanceMapper.toDomain(userFound)
+    } catch (error) {
+      const err = error as Error
+      throw new InfrastructureError(err.message, 503)
     }
-
-    return UserPersistanceMapper.toDomain(userFound)
   }
 
   async findAll (): Promise<User[]> {
-    const rawUsers = Array.from(this.users.values())
-    return rawUsers.map(rawUser => UserPersistanceMapper.toDomain(rawUser))
+    try {
+      const rawUsers = Array.from(this.users.values())
+      return rawUsers.map(rawUser => UserPersistanceMapper.toDomain(rawUser))
+    } catch (error) {
+      const err = error as Error
+      throw new InfrastructureError(err.message, 503)
+    }
   }
 }
