@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "serverless offline --stage dev --region us-east-1",
+    "dev": "tsc && tsc-alias && serverless offline --stage dev --region us-east-1",
     "build": "tsc",
     "lint": "ts-standard",
     "lint:fix": "ts-standard --fix",
@@ -15,20 +15,22 @@
   "license": "MIT",
   "description": "A serverless typescript template",
   "dependencies": {
-    "loggerfy": "1.1.4"
+    "loggerfy": "1.1.4",
+    "zod": "4.0.17"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.152",
     "@types/jest": "30.0.0",
-    "@types/node": "24.2.1",
-    "eslint": "8.57.1",
+    "@types/node": "24.3.0",
+    "eslint": "9.33.0",
     "jest": "30.0.5",
     "serverless-offline": "14.4.0",
     "ts-jest": "29.4.1",
     "ts-node": "10.9.2",
     "ts-standard": "12.0.2",
+    "tsc-alias": "1.8.16",
     "typescript": "5.9.2",
-    "typescript-eslint": "8.39.0"
+    "typescript-eslint": "8.40.0"
   },
   "ts-standard": {
     "project": "./tsconfig.json",

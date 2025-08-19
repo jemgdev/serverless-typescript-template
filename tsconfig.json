@@ -10,10 +10,31 @@
     "strict": true,
     "target": "ES2022",
     "sourceMap": true,
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "paths": {
+      // user
+      "@user/*": ["user/*"],
+      "@user/domain/*": ["user/domain/*"],
+      "@user/value-objects/*": ["user/domain/value-objects/*"],
+      "@user/application/*": ["user/application/*"],
+      "@user/usecases/*": ["user/application/usecases/*"],
+      "@user/ports/*": ["user/application/ports/*"],
+      
+      
+      "@user/infrastructure/*": ["user/infrastructure/*"],
+      "@user/driven/*": ["user/infrastructure/driven/*"],
+      "@user/driving/*": ["user/infrastructure/driving/*"],
+
+      // shared
+      "@shared/*": ["shared/*"],
+      "@shared/libraries/*": ["shared/libraries/*"],
+      "@shared/logger/*": ["shared/libraries/logger/*"],
+      "@shared/utils/*": ["shared/utils/*"],
+      "@shared/constants/*": ["shared/utils/constants/*"]
+    }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "test"]
+  "exclude": ["node_modules", "test", "**/*.test.ts"]
 }
