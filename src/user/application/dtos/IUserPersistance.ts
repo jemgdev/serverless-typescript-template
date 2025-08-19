@@ -1,4 +1,4 @@
-export interface RawUserRecord {
+export interface IUserPersistance {
   id: string
   name: string
   last_name: string

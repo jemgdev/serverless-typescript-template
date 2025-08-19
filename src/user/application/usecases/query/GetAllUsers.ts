@@ -1,8 +1,8 @@
 import { User } from '../../../domain/User'
-import { UserRepository } from '../../ports/UserRepository'
+import { UserPersistanceRepository } from '../../ports/UserPersistanceRepository'
 
 export class GetAllUsers {
-  constructor (private readonly userRepository: UserRepository) {}
+  constructor (private readonly userRepository: UserPersistanceRepository) {}
 
   async execute (): Promise<User[]> {
     const users = await this.userRepository.findAll()

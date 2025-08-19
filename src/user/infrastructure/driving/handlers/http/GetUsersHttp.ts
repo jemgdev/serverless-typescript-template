@@ -2,11 +2,10 @@ import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { Loggerfy } from 'loggerfy'
 import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
-import { bodyParser, headerParser } from '@shared/utils/parsers'
 import { responseMessage } from '@shared/utils/response-message'
-import { StatusCodes } from '@shared/utils/constants/status-codes'
-import { MessageCodes } from '@shared/utils/constants/message-codes'
-import { Messages } from '@shared/utils/constants/messages'
+import { StatusCodes } from '@shared/utils/constants/StatusCodes'
+import { MessageCodes } from '@shared/utils/constants/MessageCodes'
+import { Messages } from '@shared/utils/constants/Messages'
 
 export const handler = async (
   event: APIGatewayProxyEventV2
@@ -23,9 +22,6 @@ export const handler = async (
         event
       })
       .write()
-
-    headerParser<unknown>(event)
-    bodyParser<unknown>(event)
 
     const userRepository = new InMemoryUserRepository()
     const getAllUsers = new GetAllUsers(userRepository)

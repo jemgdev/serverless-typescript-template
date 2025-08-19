@@ -1,17 +1,30 @@
+import { ILogger } from '../../../../shared/libraries/logger/ILogger'
 import { User } from '../../../domain/User'
-import { UserRepository } from '../../ports/UserRepository'
+import { UserPersistanceRepository } from '../../ports/UserPersistanceRepository'
 
 export class CreateUser {
-  constructor (private readonly userRepository: UserRepository) {}
+  constructor (
+    private readonly userRepository: UserPersistanceRepository,
+    private readonly logger: ILogger
+  ) {}
 
-  async execute (input: {
-    name: string
-    lastname: string
-    age: number
-    identificationNumber: string
-    identificationType: string
-  }): Promise<void> {
-    const user = User.create(input)
-    await this.userRepository.save(user)
+  async execute (user: User): Promise<{
+    userId: string
+  }> {
+    const userData = user.toPrimitives()
+
+    this.logger.info('User data to save', 'CREATE_USER', 'User data to save', {
+      userData
+    })
+
+    const userId = await this.userRepository.save(user)
+
+    this.logger.info('User saved', 'CREATE_USER', 'User saved', {
+      id: userId
+    })
+
+    return {
+      userId
+    }
   }
 }

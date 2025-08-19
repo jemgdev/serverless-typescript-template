@@ -1,11 +1,11 @@
 import { User } from '../../domain/User'
-import { UserRepository } from '../../application/ports/UserRepository'
+import { UserPersistanceRepository } from '../../application/ports/UserPersistanceRepository'
 import { randomUUID } from 'crypto'
-import { UserMapper } from '../transformers/UserMapper'
-import { RawUserRecord } from '../transformers/RawUserRecord'
+import { UserPersistanceMapper } from '../../application/mappers/UserPersistanceMapper'
+import { IUserPersistance } from '../../application/dtos/IUserPersistance'
 
-export class InMemoryUserRepository implements UserRepository {
-  private readonly users = new Map<string, RawUserRecord>()
+export class InMemoryUserRepository implements UserPersistanceRepository {
+  private readonly users = new Map<string, IUserPersistance>()
 
   constructor () {
     const id = randomUUID()
@@ -19,11 +19,13 @@ export class InMemoryUserRepository implements UserRepository {
     })
   }
 
-  async save (user: User): Promise<void> {
+  async save (user: User): Promise<string> {
     this.users.set(
       user.toPrimitives().id,
-      UserMapper.toPersistence(user)
+      UserPersistanceMapper.toPersistence(user)
     )
+
+    return user.toPrimitives().id
   }
 
   async findById (id: string): Promise<User | null> {
@@ -33,11 +35,11 @@ export class InMemoryUserRepository implements UserRepository {
       return null
     }
 
-    return UserMapper.toDomain(userFound)
+    return UserPersistanceMapper.toDomain(userFound)
   }
 
   async findAll (): Promise<User[]> {
     const rawUsers = Array.from(this.users.values())
-    return rawUsers.map(rawUser => UserMapper.toDomain(rawUser))
+    return rawUsers.map(rawUser => UserPersistanceMapper.toDomain(rawUser))
   }
 }

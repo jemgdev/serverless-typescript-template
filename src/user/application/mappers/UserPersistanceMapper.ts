@@ -1,8 +1,8 @@
 import { User } from '@user/domain/User'
-import { RawUserRecord } from './RawUserRecord'
+import { IUserPersistance } from '../dtos/IUserPersistance'
 
-export class UserMapper {
-  static toDomain (raw: RawUserRecord): User {
+export class UserPersistanceMapper {
+  static toDomain (raw: IUserPersistance): User {
     return User.fromPrimitives({
       id: raw.id,
       name: raw.name,
@@ -13,7 +13,7 @@ export class UserMapper {
     })
   }
 
-  static toPersistence (user: User): RawUserRecord {
+  static toPersistence (user: User): IUserPersistance {
     const p = user.toPrimitives()
     return {
       id: p.id,

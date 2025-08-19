@@ -1,29 +1,23 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
-import { Loggerfy } from 'loggerfy'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
 import { bodyParser } from '@shared/utils/parsers'
 import { responseMessage } from '@shared/utils/response-message'
-import { StatusCodes } from '@shared/utils/constants/status-codes'
-import { MessageCodes } from '@shared/utils/constants/message-codes'
-import { Messages } from '@shared/utils/constants/messages'
+import { StatusCodes } from '@shared/utils/constants/StatusCodes'
+import { MessageCodes } from '@shared/utils/constants/MessageCodes'
+import { Messages } from '@shared/utils/constants/Messages'
+import { UserHttpMapper } from '@user/application/mappers/UserHttpMapper'
+import { ICreateUserHttpResponse } from '@user/application/dtos/ICreateUserHttpResponse'
+import { Logger } from '@shared/libraries/logger/Logger'
+
+const logger = new Logger()
+const userRepository = new InMemoryUserRepository()
+const createUser = new CreateUser(userRepository, logger)
 
 export const handler = async (
   event: APIGatewayProxyEventV2
 ): Promise<APIGatewayProxyResultV2> => {
-  const logger = new Loggerfy()
-
   try {
-    logger
-      .info()
-      .setCode('handler')
-      .setDetail('Event data')
-      .setMessage('SQS event data')
-      .setMetadata({
-        event
-      })
-      .write()
-
     const body = bodyParser<{
       name: string
       lastname: string
@@ -32,33 +26,33 @@ export const handler = async (
       identificationType: string
     }>(event)
 
-    const userRepository = new InMemoryUserRepository()
-    const createUser = new CreateUser(userRepository)
+    const user = UserHttpMapper.fromRequest({
+      name: body.name,
+      lastName: body.lastname,
+      age: body.age,
+      identificationNumber: body.identificationNumber,
+      identificationType: body.identificationType
+    })
 
-    await createUser.execute(body)
+    const userData = await createUser.execute(user)
+
+    const response: ICreateUserHttpResponse = {
+      id: userData.userId
+    }
 
     return responseMessage<{
       code: string
       message: string
+      data: ICreateUserHttpResponse
     }>({
       statusCode: StatusCodes.OPERATION_SUCCESSFUL,
       body: {
         code: MessageCodes.OPERATION_SUCCESSFUL,
-        message: Messages.OPERATION_SUCCESSFUL
+        message: Messages.OPERATION_SUCCESSFUL,
+        data: response
       }
     })
   } catch (err) {
-    const error = err as Error
-    logger
-      .error()
-      .setCode('handler')
-      .setDetail('Error processing request')
-      .setMessage('Error processing request')
-      .setMetadata({
-        message: error.message
-      })
-      .write()
-
     return responseMessage<{
       code: string
       message: string
