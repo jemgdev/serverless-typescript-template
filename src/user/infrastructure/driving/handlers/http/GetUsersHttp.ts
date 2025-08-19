@@ -9,17 +9,13 @@ import { Logger } from '@shared/libraries/logger/Logger'
 import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
-// Define an interface for the dependencies
 interface GetUsersHandlerDependencies {
   logger: ILogger
-  userRepository: UserPersistanceRepository
   getAllUsersUseCase: GetAllUsers
 }
 
-// Factory function to build the handler with injected dependencies
 export const buildHandler = ({
   logger,
-  userRepository,
   getAllUsersUseCase
 }: GetUsersHandlerDependencies) => {
   return async (
@@ -67,13 +63,11 @@ export const buildHandler = ({
   }
 }
 
-// Default handler for AWS Lambda deployment
-const defaultLogger = new Logger()
-const defaultUserRepository = new InMemoryUserRepository()
-const defaultGetAllUsersUseCase = new GetAllUsers(defaultUserRepository)
+const logger = new Logger()
+const userRepository = new InMemoryUserRepository()
+const getAllUsers = new GetAllUsers(userRepository)
 
 export const handler = buildHandler({
-  logger: defaultLogger,
-  userRepository: defaultUserRepository,
-  getAllUsersUseCase: defaultGetAllUsersUseCase
+  logger,
+  getAllUsersUseCase: getAllUsers
 })

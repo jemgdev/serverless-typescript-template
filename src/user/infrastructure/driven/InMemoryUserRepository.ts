@@ -1,10 +1,10 @@
 
 import { UserPersistanceRepository } from '@user/application/ports/UserPersistanceRepository'
 import { randomUUID } from 'crypto'
-import { UserPersistanceMapper } from '@user/application/mappers/UserPersistanceMapper'
-import { IUserPersistance } from '@user/application/dtos/IUserPersistance'
 import { User } from '@user/domain/User'
 import { InfrastructureError } from '@shared/errors/InfrastructureError'
+import { IUserPersistance } from './dtos/IUserPersistance'
+import { UserPersistanceMapper } from './mappers/UserPersistanceMapper'
 
 export class InMemoryUserRepository implements UserPersistanceRepository {
   private readonly users = new Map<string, IUserPersistance>()

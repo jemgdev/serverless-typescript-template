@@ -9,17 +9,13 @@ import { Logger } from '@shared/libraries/logger/Logger'
 import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
-// Define an interface for the dependencies
 interface GetUsersSQSHandlerDependencies {
   logger: ILogger
-  userRepository: UserPersistanceRepository
   getAllUsersUseCase: GetAllUsers
 }
 
-// Factory function to build the handler with injected dependencies
 export const buildHandler = ({
   logger,
-  userRepository,
   getAllUsersUseCase
 }: GetUsersSQSHandlerDependencies) => {
   return async (event: SQSEvent): Promise<SQSBatchResponse> => {
@@ -66,13 +62,11 @@ export const buildHandler = ({
   }
 }
 
-// Default handler for AWS Lambda deployment
 const defaultLogger = new Logger()
 const defaultUserRepository = new InMemoryUserRepository()
 const defaultGetAllUsersUseCase = new GetAllUsers(defaultUserRepository)
 
 export const handler = buildHandler({
   logger: defaultLogger,
-  userRepository: defaultUserRepository,
   getAllUsersUseCase: defaultGetAllUsersUseCase
 })

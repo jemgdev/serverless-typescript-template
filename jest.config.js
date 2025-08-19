@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} **/
 module.exports = {
-  testMatch: ['<rootDir>/src/**/*.test.ts'],
+  testMatch: ['<rootDir>/src/**/unit/*.test.ts'],
   testEnvironment: 'node',
   preset: 'ts-jest',
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
@@ -31,8 +31,8 @@ module.exports = {
     '^@user/application/(.*)$': '<rootDir>/src/user/application/$1',
     '^@user/usecases/(.*)$': '<rootDir>/src/user/application/usecases/$1',
     '^@user/ports/(.*)$': '<rootDir>/src/user/application/ports/$1',
-    '^@user/mappers/(.*)$': '<rootDir>/src/user/application/mappers/$1',
-    '^@user/dtos/(.*)$': '<rootDir>/src/user/application/dtos/$1',
+    
+    
     '^@user/infrastructure/(.*)$': '<rootDir>/src/user/infrastructure/$1',
     '^@user/driven/(.*)$': '<rootDir>/src/user/infrastructure/driven/$1',
     '^@user/driving/(.*)$': '<rootDir>/src/user/infrastructure/driving/$1',

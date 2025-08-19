@@ -1,7 +1,7 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
-import { UserHttpMapper } from '@user/application/mappers/UserHttpMapper'
-import { ICreateUserHttpResponse } from '@user/application/dtos/ICreateUserHttpResponse'
+import { UserHttpMapper } from '../../mappers/UserHttpMapper'
+import { ICreateUserHttpResponse } from '@user/infrastructure/driving/dtos/ICreateUserHttpResponse'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
 import { bodyParser } from '@shared/utils/Parsers'
@@ -17,17 +17,13 @@ import { InfrastructureError } from '@shared/errors/InfrastructureError'
 import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
-// Define an interface for the dependencies
 interface CreateUserHandlerDependencies {
   logger: ILogger
-  userRepository: UserPersistanceRepository
   createUserUseCase: CreateUser
 }
 
-// Factory function to build the handler with injected dependencies
 export const buildHandler = ({
   logger,
-  userRepository,
   createUserUseCase
 }: CreateUserHandlerDependencies) => {
   return async (
@@ -85,84 +81,85 @@ export const buildHandler = ({
         }
       })
     } catch (error) {
-      if (error instanceof ValidationError) {
-        return responseMessage<{
-          code: string
-          message: string
-          errors: Array<{
-            field: string
+      const handleErrorResponse = (err: unknown) => {
+        if (err instanceof ValidationError) {
+          return responseMessage<{
+            code: string
             message: string
-          }>
-        }>({
-          statusCode: StatusCodes.BAD_REQUEST,
-          body: {
-            code: MessageCodes.BAD_REQUEST,
-            message: error.message,
-            errors: error.errors
-          }
-        })
-      }
-
-      if (error instanceof DomainError) {
-        return responseMessage<{
-          code: string
-          message: string
-        }>({
-          statusCode: StatusCodes.PROCESS_ERROR,
-          body: {
-            code: MessageCodes.PROCESS_ERROR,
-            message: error.message
-          }
-        })
-      }
-
-      if (error instanceof ApplicationError) {
-        return responseMessage<{
-          code: string
-          message: string
-        }>({
-          statusCode: error.statusCode,
-          body: {
-            code: MessageCodes.PROCESS_ERROR,
-            message: error.message
-          }
-        })
-      }
-
-      if (error instanceof InfrastructureError) {
-        return responseMessage<{
-          code: string
-          message: string
-        }>({
-          statusCode: error.statusCode,
-          body: {
-            code: MessageCodes.PROCESS_ERROR,
-            message: error.message
-          }
-        })
-      }
-
-      return responseMessage<{
-        code: string
-        message: string
-      }>({
-        statusCode: StatusCodes.UNCONTROLLER_ERROR,
-        body: {
-          code: MessageCodes.UNCONTROLLER_ERROR,
-          message: error instanceof Error ? error.message : Messages.UNCONTROLLER_ERROR
+            errors: Array<{
+              field: string
+              message: string
+            }>
+          }>({
+            statusCode: StatusCodes.BAD_REQUEST,
+            body: {
+              code: MessageCodes.BAD_REQUEST,
+              message: err.message,
+              errors: err.errors
+            }
+          })
         }
-      })
+
+        if (err instanceof DomainError) {
+          return responseMessage<{
+            code: string
+            message: string
+          }>({
+            statusCode: StatusCodes.PROCESS_ERROR,
+            body: {
+              code: MessageCodes.PROCESS_ERROR,
+              message: err.message
+            }
+          })
+        }
+
+        if (err instanceof ApplicationError) {
+          return responseMessage<{
+            code: string
+            message: string
+          }>({
+            statusCode: err.statusCode,
+            body: {
+              code: MessageCodes.PROCESS_ERROR,
+              message: err.message
+            }
+          })
+        }
+
+        if (err instanceof InfrastructureError) {
+          return responseMessage<{
+            code: string
+            message: string
+          }>({
+            statusCode: err.statusCode,
+            body: {
+              code: MessageCodes.PROCESS_ERROR,
+              message: err.message
+            }
+          })
+        }
+
+        return responseMessage<{
+          code: string
+          message: string
+        }>({
+          statusCode: StatusCodes.UNCONTROLLER_ERROR,
+          body: {
+            code: MessageCodes.UNCONTROLLER_ERROR,
+            message: err instanceof Error ? err.message : Messages.UNCONTROLLER_ERROR
+          }
+        })
+      }
+      return handleErrorResponse(error)
     }
   }
 }
 
-// Default handler for AWS Lambda deployment
-const defaultLogger = new Logger()
-const defaultUserRepository = new InMemoryUserRepository()
-const defaultCreateUserUseCase = new CreateUser(defaultUserRepository, defaultLogger)
+const logger = new Logger()
+const userRepository = new InMemoryUserRepository()
+const createUser = new CreateUser(userRepository, logger)
 
 export const handler = buildHandler({
-  logger: defaultLogger,
-  userRepository: defaultUserRepository,
-  createUserUseCase: defaultCreateUserUseCase
+  logger,
+  createUserUseCase: createUser
 })
