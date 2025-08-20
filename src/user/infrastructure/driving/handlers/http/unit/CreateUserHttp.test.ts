@@ -4,7 +4,7 @@ import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
 import { UserHttpMapper } from '../../../mappers/UserHttpMapper'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
-import * as Parsers from '@shared/utils/Parsers'
+import * as Parsers from '../../../../../../shared/utils/Parsers'
 import * as ResponseMessage from '@shared/utils/ResponseMessage'
 import { Logger } from '@shared/libraries/logger/Logger'
 import { ValidationError } from '@shared/errors/ValidationError'
@@ -21,7 +21,7 @@ import { ILogger } from '@shared/libraries/logger/ILogger'
 // Mock external modules that are still used directly (not injected)
 jest.mock('../../../mappers/UserHttpMapper')
 jest.mock('@user/infrastructure/driving/schemas/CreateUserSchema')
-jest.mock('@shared/utils/Parsers')
+jest.mock('../../../../../../shared/utils/Parsers')
 jest.mock('@shared/utils/ResponseMessage')
 
 // Mock error classes to control their behavior
