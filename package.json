@@ -7,7 +7,7 @@
     "build": "tsc",
     "lint": "ts-standard",
     "lint:fix": "ts-standard --fix",
-    "test": "jest test --no-cache --coverage --runInBand",
+    "test": "jest test --coverage",
     "deploy": "serverless deploy --stage dev --region us-east-1 --verbose"
   },
   "keywords": [],

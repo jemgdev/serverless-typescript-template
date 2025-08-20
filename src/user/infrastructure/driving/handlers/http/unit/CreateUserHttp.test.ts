@@ -2,11 +2,10 @@
 import { buildHandler } from '../CreateUserHttp'
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
-import { UserHttpMapper } from '../../../mappers/UserHttpMapper'
+import { UserHttpMapper } from '@user/infrastructure/driving/mappers/UserHttpMapper'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
-import * as Parsers from '../../../../../../shared/utils/TryExtractData'
+import * as Parsers from '@shared/utils/TryExtractData'
 import * as ResponseMessage from '@shared/utils/ResponseMessage'
-import { Logger } from '@shared/libraries/logger/Logger'
 import { ValidationError } from '@shared/errors/ValidationError'
 import { ApplicationError } from '@shared/errors/ApplicationError'
 import { DomainError } from '@shared/errors/DomainError'
@@ -19,9 +18,9 @@ import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
 // Mock external modules that are still used directly (not injected)
-jest.mock('../../../mappers/UserHttpMapper')
+jest.mock('@user/infrastructure/driving/mappers/UserHttpMapper')
 jest.mock('@user/infrastructure/driving/schemas/CreateUserSchema')
-jest.mock('../../../../../../shared/utils/TryExtractData')
+jest.mock('@shared/utils/TryExtractData')
 jest.mock('@shared/utils/ResponseMessage')
 
 // Mock error classes to control their behavior
@@ -32,7 +31,6 @@ jest.mock('@shared/errors/InfrastructureError')
 
 describe('CreateUserHttp Handler', () => {
   let loggerInstance: jest.Mocked<ILogger>
-  let userRepositoryInstance: jest.Mocked<UserPersistanceRepository>
   let createUserInstance: jest.Mocked<CreateUser>
   let handler: (event: APIGatewayProxyEventV2) => Promise<APIGatewayProxyResultV2>
 
