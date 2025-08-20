@@ -1,20 +1,19 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
-import { UserHttpMapper } from '../../mappers/UserHttpMapper'
+import { UserHttpMapper } from '@user/infrastructure/driving/mappers/UserHttpMapper'
 import { ICreateUserHttpResponse } from '@user/infrastructure/driving/dtos/ICreateUserHttpResponse'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
-import { bodyParser } from '@shared/utils/Parsers'
+import { bodyParser } from '@shared/utils/TryExtractData'
 import { responseMessage } from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
-import { Messages } from '@shared/utils/constants/Messages'
+import { MessageDetail } from '@shared/utils/constants/MessageDetail'
 import { Logger } from '@shared/libraries/logger/Logger'
 import { ValidationError } from '@shared/errors/ValidationError'
 import { ApplicationError } from '@shared/errors/ApplicationError'
 import { DomainError } from '@shared/errors/DomainError'
 import { InfrastructureError } from '@shared/errors/InfrastructureError'
-import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
 interface CreateUserHandlerDependencies {
@@ -76,7 +75,7 @@ export const buildHandler = ({
         statusCode: StatusCodes.OPERATION_SUCCESSFUL,
         body: {
           code: MessageCodes.OPERATION_SUCCESSFUL,
-          message: Messages.OPERATION_SUCCESSFUL,
+          message: MessageDetail.OPERATION_SUCCESSFUL,
           data: response
         }
       })
@@ -146,7 +145,7 @@ export const buildHandler = ({
           statusCode: StatusCodes.UNCONTROLLER_ERROR,
           body: {
             code: MessageCodes.UNCONTROLLER_ERROR,
-            message: err instanceof Error ? err.message : Messages.UNCONTROLLER_ERROR
+            message: err instanceof Error ? err.message : MessageDetail.UNCONTROLLER_ERROR
           }
         })
       }

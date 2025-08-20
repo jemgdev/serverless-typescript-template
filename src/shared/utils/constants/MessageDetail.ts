@@ -1,4 +1,4 @@
-export const Messages = {
+export const MessageDetail = {
   OPERATION_SUCCESSFUL: 'Operation successful',
   BAD_REQUEST: 'Bad request',
   UNCONTROLLER_ERROR: 'Uncontroller error',

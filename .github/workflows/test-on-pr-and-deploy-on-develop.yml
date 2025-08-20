@@ -14,9 +14,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
       - name: Install dependencies
-        run: npm i
+        run: npm install
       - name: Run tests
         run: npm run test
   deploy:
@@ -29,13 +29,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 22
       - name: Install dependencies
         run: npm install
       - name: Build the project
         run: npm run build
       - name: Install Serverless Framework
-        run: npm install -g serverless@3
+        run: npm install -g serverless@4
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
