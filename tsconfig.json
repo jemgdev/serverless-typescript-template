@@ -27,11 +27,7 @@
       "@user/driving/*": ["user/infrastructure/driving/*"],
 
       // shared
-      "@shared/*": ["shared/*"],
-      "@shared/libraries/*": ["shared/libraries/*"],
-      "@shared/logger/*": ["shared/libraries/logger/*"],
-      "@shared/utils/*": ["shared/utils/*"],
-      "@shared/constants/*": ["shared/utils/constants/*"]
+      "@shared/*": ["shared/*"]
     }
   },
   "include": ["src/**/*"],

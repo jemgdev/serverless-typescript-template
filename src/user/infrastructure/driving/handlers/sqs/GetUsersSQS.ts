@@ -3,7 +3,7 @@ import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUser
 import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { responseMessage } from '@shared/utils/ResponseMessage'
-import { sqsParser } from '@shared/utils/Parsers'
+import { sqsParser } from '@shared/utils/TryExtractData'
 import { User } from '@user/domain/User'
 import { Logger } from '@shared/libraries/logger/Logger'
 import { ILogger } from '@shared/libraries/logger/ILogger'

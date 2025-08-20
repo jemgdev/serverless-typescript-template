@@ -2,7 +2,7 @@ import { buildHandler } from '../GetUsersSQS'
 import { SQSEvent, SQSBatchResponse } from 'aws-lambda'
 import { GetAllUsers } from '@user/application/usecases/query/GetAllUsers'
 import { Logger } from '@shared/libraries/logger/Logger'
-import * as Parsers from '@shared/utils/Parsers'
+import * as Parsers from '@shared/utils/TryExtractData'
 import * as ResponseMessage from '@shared/utils/ResponseMessage'
 import { User } from '@user/domain/User'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
@@ -11,7 +11,7 @@ import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository
 // Mock external modules
 jest.mock('@user/application/usecases/query/GetAllUsers')
 jest.mock('@shared/libraries/logger/Logger')
-jest.mock('@shared/utils/Parsers')
+jest.mock('@shared/utils/TryExtractData')
 jest.mock('@shared/utils/ResponseMessage')
 
 describe('GetUsersSQS Handler', () => {

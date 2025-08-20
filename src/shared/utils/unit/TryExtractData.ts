@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventV2, SQSEvent } from 'aws-lambda'
-import { queryParser, bodyParser, headerParser, sqsParser } from '../Parsers'
+import { queryParser, bodyParser, headerParser, sqsParser } from '../TryExtractData'
 
 describe('Parsers', () => {
   describe('queryParser', () => {

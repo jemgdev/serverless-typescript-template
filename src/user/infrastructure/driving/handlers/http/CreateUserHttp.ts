@@ -4,7 +4,7 @@ import { UserHttpMapper } from '@user/infrastructure/driving/mappers/UserHttpMap
 import { ICreateUserHttpResponse } from '@user/infrastructure/driving/dtos/ICreateUserHttpResponse'
 import { CreateUserSchema } from '@user/infrastructure/driving/schemas/CreateUserSchema'
 import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
-import { bodyParser } from '@shared/utils/Parsers'
+import { bodyParser } from '@shared/utils/TryExtractData'
 import { responseMessage } from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'

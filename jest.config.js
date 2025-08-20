@@ -4,7 +4,6 @@ module.exports = {
   testEnvironment: 'node',
   preset: 'ts-jest',
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
-  modulePathIgnorePatterns: ['<rootDir>/.serverless/'],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.serverless/',
@@ -19,9 +18,6 @@ module.exports = {
   detectOpenHandles: true,
   verbose: true,
   cache: false,
-  transform: {
-    '^.+\\.tsx?$': ['ts-jest', { tsconfig: 'tsconfig.json' }]
-  },
   moduleNameMapper: {
     // User paths
     '^@user/value-objects/(.*)$': '<rootDir>/src/user/domain/value-objects/$1',
@@ -35,10 +31,6 @@ module.exports = {
     '^@user/(.*)$': '<rootDir>/src/user/$1',
 
     // Shared paths
-    '^@shared/libraries/(.*)$': '<rootDir>/src/shared/libraries/$1',
-    '^@shared/logger/(.*)$': '<rootDir>/src/shared/libraries/logger/$1',
-    '^@shared/utils/(.*)$': '<rootDir>/src/shared/utils/$1',
-    '^@shared/constants/(.*)$': '<rootDir>/src/shared/utils/constants/$1',
     '^@shared/(.*)$': '<rootDir>/src/shared/$1'
   }
 }
