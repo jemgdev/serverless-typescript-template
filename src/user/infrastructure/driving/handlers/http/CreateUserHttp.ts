@@ -8,7 +8,7 @@ import { bodyParser } from '@shared/utils/TryExtractData'
 import { responseMessage } from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
-import { Messages } from '@shared/utils/constants/Messages'
+import { MessageDetail } from '@shared/utils/constants/MessageDetail'
 import { Logger } from '@shared/libraries/logger/Logger'
 import { ValidationError } from '@shared/errors/ValidationError'
 import { ApplicationError } from '@shared/errors/ApplicationError'
@@ -75,7 +75,7 @@ export const buildHandler = ({
         statusCode: StatusCodes.OPERATION_SUCCESSFUL,
         body: {
           code: MessageCodes.OPERATION_SUCCESSFUL,
-          message: Messages.OPERATION_SUCCESSFUL,
+          message: MessageDetail.OPERATION_SUCCESSFUL,
           data: response
         }
       })
@@ -145,7 +145,7 @@ export const buildHandler = ({
           statusCode: StatusCodes.UNCONTROLLER_ERROR,
           body: {
             code: MessageCodes.UNCONTROLLER_ERROR,
-            message: err instanceof Error ? err.message : Messages.UNCONTROLLER_ERROR
+            message: err instanceof Error ? err.message : MessageDetail.UNCONTROLLER_ERROR
           }
         })
       }

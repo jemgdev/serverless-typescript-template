@@ -5,10 +5,9 @@ import { Logger } from '@shared/libraries/logger/Logger'
 import * as ResponseMessage from '@shared/utils/ResponseMessage'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
-import { Messages } from '@shared/utils/constants/Messages'
+import { MessageDetail } from '@shared/utils/constants/MessageDetail'
 import { User } from '@user/domain/User'
 import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
-import { InMemoryUserRepository } from '@user/infrastructure/driven/InMemoryUserRepository'
 
 // Mock external modules
 jest.mock('@user/application/usecases/query/GetAllUsers')
@@ -100,7 +99,7 @@ describe('GetUsersHttp Handler', () => {
       statusCode: StatusCodes.OPERATION_SUCCESSFUL,
       body: {
         code: MessageCodes.OPERATION_SUCCESSFUL,
-        message: Messages.OPERATION_SUCCESSFUL,
+        message: MessageDetail.OPERATION_SUCCESSFUL,
         data: [mockUserPrimitives]
       }
     })
@@ -131,7 +130,7 @@ describe('GetUsersHttp Handler', () => {
       statusCode: StatusCodes.UNCONTROLLER_ERROR,
       body: {
         code: MessageCodes.UNCONTROLLER_ERROR,
-        message: Messages.UNCONTROLLER_ERROR
+        message: MessageDetail.UNCONTROLLER_ERROR
       }
     })
     expect(result).toEqual(mockApiResponse)

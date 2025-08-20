@@ -12,9 +12,8 @@ import { DomainError } from '@shared/errors/DomainError'
 import { InfrastructureError } from '@shared/errors/InfrastructureError'
 import { StatusCodes } from '@shared/utils/constants/StatusCodes'
 import { MessageCodes } from '@shared/utils/constants/MessageCodes'
-import { Messages } from '@shared/utils/constants/Messages'
+import { MessageDetail } from '@shared/utils/constants/MessageDetail'
 import { User } from '@user/domain/User'
-import { UserPersistanceRepository } from '@user/ports/UserPersistanceRepository'
 import { ILogger } from '@shared/libraries/logger/ILogger'
 
 // Mock external modules that are still used directly (not injected)
@@ -93,12 +92,6 @@ describe('CreateUserHttp Handler', () => {
       error: jest.fn()
     } as jest.Mocked<ILogger>
 
-    userRepositoryInstance = {
-      save: jest.fn(),
-      findById: jest.fn(),
-      findAll: jest.fn()
-    } as jest.Mocked<UserPersistanceRepository>
-
     // Simplified mock for CreateUser
     createUserInstance = {
       execute: jest.fn()
@@ -176,7 +169,7 @@ describe('CreateUserHttp Handler', () => {
       statusCode: StatusCodes.OPERATION_SUCCESSFUL,
       body: {
         code: MessageCodes.OPERATION_SUCCESSFUL,
-        message: Messages.OPERATION_SUCCESSFUL,
+        message: MessageDetail.OPERATION_SUCCESSFUL,
         data: mockCreateUserHttpResponse
       }
     })
