@@ -1,4 +1,3 @@
-// Import the buildHandler from the refactored module
 import { buildHandler } from '../CreateUserHttp'
 import { APIGatewayProxyEventV2, APIGatewayProxyResultV2 } from 'aws-lambda'
 import { CreateUser } from '@user/application/usecases/command/CreateUser'
