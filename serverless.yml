@@ -9,24 +9,13 @@ provider:
     STAGE: ${opt:stage}
     REGION: ${opt:region}
 
-package:
-  individually: true
-  patterns:
-    - dist/**
-    - node_modules/**
-    - package.json
-    - '!.github/**'
-    - '!src/**'
-    - '!test/**'
-    - '!.git/**'
-    - '!*.md'
-    - '!.vscode/**'
-    - '!tsconfig.json'
-    - '!jest.config.js'
-    - '!LICENSE'
-
-plugins:
-  - serverless-offline
+custom:
+  build:
+    esbuild: true
+    platform: node
+    alias:
+      '@user': './src/user'
+      '@shared': './src/shared'
 
 resources:
   Resources:
@@ -56,7 +45,7 @@ resources:
 
 functions:
   get-users:
-    handler: dist/user/infrastructure/driving/handlers/http/GetUsersHttp.handler
+    handler: src/user/infrastructure/driving/handlers/http/GetUsersHttp.handler
     role: GetUsersRole
     timeout: 29
     memorySize: 128
@@ -66,7 +55,7 @@ functions:
           path: /api/v1/users
           method: get
   create-user:
-    handler: dist/user/infrastructure/driving/handlers/http/CreateUserHttp.handler
+    handler: src/user/infrastructure/driving/handlers/http/CreateUserHttp.handler
     role: GetUsersRole
     timeout: 29
     memorySize: 128
